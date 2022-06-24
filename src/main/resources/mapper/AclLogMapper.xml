@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.base.example.primary.mapper.AclLogMapper">
+  <resultMap id="BaseResultMap" type="com.base.example.primary.entity.AclLog">
+    <!--@mbg.generated-->
+    <!--@Table acl_log-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="type" jdbcType="CHAR" property="type" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="remote_ip" jdbcType="VARCHAR" property="remoteIp" />
+    <result column="request_url" jdbcType="VARCHAR" property="requestUrl" />
+    <result column="method" jdbcType="VARCHAR" property="method" />
+    <result column="params" jdbcType="LONGVARCHAR" property="params" />
+    <result column="opsTime" jdbcType="INTEGER" property="opstime" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="request_type" jdbcType="VARCHAR" property="requestType" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, `type`, title, remote_ip, request_url, `method`, params, opsTime, create_time,
+    remarks, create_by, request_type
+  </sql>
+</mapper>

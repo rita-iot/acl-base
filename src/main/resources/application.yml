@@ -1,0 +1,29 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: acl-base-example
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+#    url: jdbc:mysql://10.0.16.6:3306/acl?useUnicode=true&characterEncoding=utf8&useSSL=false
+    url: jdbc:mysql://42.192.37.49:3306/acl?useUnicode=true&characterEncoding=utf8&useSSL=false
+    username: root
+    password: 4amgucun123A
+    hikari:
+      max-lifetime: 50000
+
+  redis:
+    host: localhost
+    port: 6379
+    database: 1
+    timeout: 5000
+    lettuce:
+      pool:
+        max-active: 20
+        max-wait: -1
+        max-idle: 5
+        min-idle: 0
+mybatis-plus:
+  mapper-locations: mapper/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #打印日志

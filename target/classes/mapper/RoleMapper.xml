@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.base.example.primary.mapper.RoleMapper">
+  <resultMap id="BaseResultMap" type="com.base.example.primary.entity.Role">
+    <!--@mbg.generated-->
+    <!--@Table acl_role-->
+    <id column="id" jdbcType="CHAR" property="id" />
+    <result column="role_name" jdbcType="VARCHAR" property="roleName" />
+    <result column="role_code" jdbcType="VARCHAR" property="roleCode" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="is_deleted" jdbcType="BOOLEAN" property="isDeleted" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, role_name, role_code, remark, is_deleted, create_time, update_time
+  </sql>
+
+</mapper>

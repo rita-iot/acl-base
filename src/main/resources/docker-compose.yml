@@ -1,0 +1,86 @@
+version: '3'
+services:
+  nginx:
+    container_name: nginx
+    image: nginx:1.14
+    environment:
+      - TZ=Asia/Shanghai
+    ports:
+      - "80:80"
+    volumes:
+      - ./config/nginx/conf.d:/etc/nginx/conf.d
+      - ./log/nginx/:/var/log/nginx/
+      - ./data/nginx/www:/var/www
+    restart: always
+
+  redis:
+    container_name: redis
+    image: redis:5.0.7
+    environment:
+      - TZ=Asia/Shanghai
+    ports:
+      - "6666:6379"
+    volumes:
+      - ./config/redis/redis.conf:/usr/local/etc/redis/redis.conf
+      - ./data/redis/:/data/
+      - ./log/redis/:/var/log/redis/
+    command: redis-server /usr/local/etc/redis/redis.conf
+    restart: always
+  mysql:
+    container_name: mysql
+    image: mysql:5.7.31
+    ports:
+      - "3303:3306"
+    environment:
+      TZ: Asia/Shanghai
+      MYSQL_ROOT_PASSWORD: 123456
+    command: mysqld
+    volumes:
+      - ./config/mysql/my.cnf:/etc/mysql/my.cnf
+      - ./data/mysql/:/var/lib/mysql/data/
+      - ./log/mysql/:/var/log/mysql/
+    restart: unless-stopped
+
+  rabbitmq:
+    image: rabbitmq:management-alpine
+    container_name: rabbitmq
+    environment:
+      - RABBITMQ_DEFAULT_VHOST=/data
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=123456
+      - SET_CONTAINER_TIMEZONE=true
+      - CONTAINER_TIMEZONE=Asia/Shanghai
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+      - "61613:61613"
+    volumes:
+      - ./data/rabbitmq:/var/lib/rabbitmq/
+      #- ./config/rabbitmq/:/etc/rabbitmq/
+      # - ./log/rabbitmq:/var/log/rabbitmq/
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "200k"
+        max-file: "10"
+    restart: always
+
+  kfws:
+    container_name: kfws
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        OUT_DIRECTORY: data/java
+    environment:
+      TZ: Asia/Shanghai
+    depends_on:
+      - nginx
+      - redis
+      - mysql
+      - rabbitmq
+    volumes:
+      - ./config/kfws/:/home/kfws-server/config/kfws/
+    ports:
+      - "8071:8071"
+    restart: always

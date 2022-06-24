@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.base.example.primary.mapper.YmRegionMapper">
+  <resultMap id="BaseResultMap" type="com.base.example.primary.entity.YmRegion">
+    <!--@mbg.generated-->
+    <!--@Table ym_region-->
+    <id column="region_id" jdbcType="CHAR" property="regionId" />
+    <result column="region_name" jdbcType="VARCHAR" property="regionName" />
+    <result column="region_code" jdbcType="CHAR" property="regionCode" />
+    <result column="region_parent_id" jdbcType="CHAR" property="regionParentId" />
+    <result column="region_level" jdbcType="CHAR" property="regionLevel" />
+    <result column="create_user" jdbcType="VARCHAR" property="createUser" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_user" jdbcType="VARCHAR" property="updateUser" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    region_id, region_name, region_code, region_parent_id, region_level, create_user,
+    create_time, update_user, update_time, remarks
+  </sql>
+</mapper>

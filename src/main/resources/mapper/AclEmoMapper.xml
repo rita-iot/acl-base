@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.base.example.primary.mapper.AclEmoMapper">
+  <resultMap id="BaseResultMap" type="com.base.example.primary.entity.AclEmo">
+    <!--@mbg.generated-->
+    <!--@Table acl_emo-->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="text" jdbcType="VARCHAR" property="text" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, `text`, create_time
+  </sql>
+    <select id="findAll" resultMap="BaseResultMap">
+        select *
+        from acl_emo
+        order by create_time desc
+    </select>
+</mapper>
