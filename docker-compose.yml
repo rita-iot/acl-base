@@ -68,7 +68,7 @@ services:
   kfws:
     container_name: kfws
     build:
-      context: .
+      context: src/main/java
       dockerfile: Dockerfile
       args:
         OUT_DIRECTORY: data/java
