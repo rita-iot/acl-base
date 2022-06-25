@@ -9,11 +9,13 @@
         <version>2.4.5</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
+    <!--项目名字-->
     <groupId>com.base.example</groupId>
     <artifactId>acl-base</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <!--项目名字-->
     <name>acl-base</name>
-    <description>Spring Boot - 单体通用基础组件</description>
+    <description>Spring Boot - 前后端分离基础架构系统</description>
     <properties>
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -140,4 +142,13 @@
             </plugin>
         </plugins>
     </build>
+    <!-- 自定义仓库 -->
+    <distributionManagement>
+        <repository>
+            <!--必须与 settings.xml 的 id 一致-->
+            <id>my-team-maven-demo-maven</id>
+            <name>maven</name>
+            <url>https://my-team-maven.pkg.coding.net/repository/maven-demo/maven/</url>
+        </repository>
+    </distributionManagement>
 </project>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings>
+    <servers>
+        <server>
+            <id>my-team-maven-demo-maven</id>
+            <username>${env.CODING_ARTIFACTS_USERNAME}</username>
+            <password>${env.CODING_ARTIFACTS_PASSWORD}</password>
+        </server>
+    </servers>
+</settings>
