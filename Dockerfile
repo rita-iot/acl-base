@@ -10,7 +10,7 @@ ENV LANG C.UTF-8
 ENV TZ=Asia/Shanghai
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
-ADD **/target/*.jar $HOME/acl.jar
+ADD acl-base-0.0.1-SNAPSHOT.jar $HOME/acl.jar
 #拷贝 配置文件和lib到镜像
 #COPY config/kfws/  $HOME/config/kfws/
 
