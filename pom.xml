@@ -143,12 +143,13 @@
         </plugins>
     </build>
     <!-- 自定义仓库 -->
+    <!-- omitted xml -->
     <distributionManagement>
         <repository>
             <!--必须与 settings.xml 的 id 一致-->
-            <id>my-team-maven-demo-maven</id>
+            <id>nayo-acl_base-maven</id>
             <name>maven</name>
-            <url>https://my-team-maven.pkg.coding.net/repository/maven-demo/maven/</url>
+            <url>https://nayo-maven.pkg.coding.net/repository/acl_base/maven/</url>
         </repository>
     </distributionManagement>
 </project>
