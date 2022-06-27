@@ -17,7 +17,7 @@ public class Articles {
     private String title;
     private String description;
     private String url;
-    private String picurl;
+    private String picurl = "http://res.mail.qq.com/node/ww/wwopenmng/images/independent/doc/test_pic_msg1.png";
     private String appid;
     private String pagepath;
 }

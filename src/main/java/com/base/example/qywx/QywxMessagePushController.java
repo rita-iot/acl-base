@@ -6,10 +6,7 @@ import cn.hutool.json.JSONUtil;
 import com.base.example.utils.Result;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -80,12 +77,32 @@ public class QywxMessagePushController {
         }
         String accessToken = (String) accessTokenMap.get("access_token");
         JSONObject jsonObject = JSONUtil.parseObj(qywxMessageVo, true);
-        Map<String, Object> paramMap = objectToMap(qywxMessageVo);
+        //Map<String, Object> paramMap = objectToMap(qywxMessageVo);
         String post = HttpUtil.post(PUSH_MESSAGE_URL + accessToken, jsonObject.toStringPretty());
 
         JSONObject jsonObject1 = JSONUtil.parseObj(post);
         return Result.ok(jsonObject1);
     }
+
+    @GetMapping("/")
+    @ApiOperation("推送消息")
+    public Result pushMessage2(@RequestBody Articles articles) {
+        List<Articles> res = new ArrayList<>();
+        res.add(articles);
+        QywxMessageVo qywxMessageVo = new QywxMessageVo();
+        qywxMessageVo.setNews(new News(res));
+        if (accessTokenMap.size() <= 0) {
+            getAccessToken();
+        }
+        String accessToken = (String) accessTokenMap.get("access_token");
+        JSONObject jsonObject = JSONUtil.parseObj(qywxMessageVo, true);
+        //Map<String, Object> paramMap = objectToMap(qywxMessageVo);
+        String post = HttpUtil.post(PUSH_MESSAGE_URL + accessToken, jsonObject.toStringPretty());
+
+        JSONObject jsonObject1 = JSONUtil.parseObj(post);
+        return Result.ok(jsonObject1);
+    }
+
 
     /**
      * 对象转为map
