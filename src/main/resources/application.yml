@@ -6,9 +6,10 @@ spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
 #    url: jdbc:mysql://10.0.16.6:3306/acl?useUnicode=true&characterEncoding=utf8&useSSL=false
-    url: jdbc:mysql://42.192.37.49:3306/acl?useUnicode=true&characterEncoding=utf8&useSSL=false
-    username: root
-    password: 4amgucun123A
+#    url: jdbc:mysql://42.192.37.49:3306/acl?useUnicode=true&characterEncoding=utf8&useSSL=false
+    url: jdbc:mysql://rm-bp11x4i74xrl970o2vo.mysql.rds.aliyuncs.com:3306/acl?useUnicode=true&characterEncoding=utf8&useSSL=false
+    username: ggkt_123
+    password: aUf36pYCiT3ngW72HF
     hikari:
       max-lifetime: 50000
 
