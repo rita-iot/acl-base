@@ -80,9 +80,9 @@ public class TokenAuthFilter extends BasicAuthenticationFilter {
             //从redis获取对应权限列表
             List<String> permissionValueList = (List<String>) redisTemplate.opsForValue().get(username);
             //  判断是否退出登录
-            if (permissionValueList == null) {
-                return null;
-            }
+            //if (permissionValueList == null) {
+            //    return null;
+            //}
             //权限列表
             Collection<GrantedAuthority> authority = new ArrayList<>();
             for (String permissionValue : permissionValueList) {
