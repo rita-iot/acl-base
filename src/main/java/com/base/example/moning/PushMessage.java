@@ -39,7 +39,7 @@ public class PushMessage {
         for (String openid : list) {
             WxMpTemplateMessage templateMessage = WxMpTemplateMessage.builder()
                     .toUser(openid)//要推送的用户openid
-                    .templateId("6g8rY4CQEg3oXVhv0UYNu3ZYIStTQUWUPndJjpFMQqs")//模板id
+                    .templateId("XD59ykya8uJgDtXAOB3ZeTy4jng3oUkG9D0ePkbbbQY")//模板id
                     //.url("http://ggkt2.vipgz1.91tunnel.com/#/pay/" + orderId)//点击模板消息要访问的网址
                     .build();
             String now = DateUtil.now();
@@ -59,10 +59,10 @@ public class PushMessage {
             templateMessage.addData(new WxMpTemplateData("keyword2", (String) weather.get("weather"), "#272727"));
             templateMessage.addData(new WxMpTemplateData("keyword3", (BigDecimal) weather.get("low") + "", "#272727"));
             templateMessage.addData(new WxMpTemplateData("keyword4", (BigDecimal) weather.get("high") + "", "#272727"));
-            templateMessage.addData(new WxMpTemplateData("keyword5", betweenDay + "", "#272727"));
-            templateMessage.addData(new WxMpTemplateData("keyword6", birthDay + "", "#272727"));
-            templateMessage.addData(new WxMpTemplateData("keyword7", "今天又是想老婆的一天", "#272727"));
-            templateMessage.addData(new WxMpTemplateData("keyword8", "记得签到哦!", "#cc0033"));
+            templateMessage.addData(new WxMpTemplateData("keyword5", betweenDay + "", "#ff0033"));
+            templateMessage.addData(new WxMpTemplateData("keyword6", birthDay + "", "#ff0033"));
+            templateMessage.addData(new WxMpTemplateData("keyword7", "今天又是想宝宝的一天", "#009933"));
+            templateMessage.addData(new WxMpTemplateData("keyword8", "记得签到哦!", "#ff0033"));
             String msg = wxMpService.getTemplateMsgService().sendTemplateMsg(templateMessage);
             System.out.println(msg);
         }
