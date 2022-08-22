@@ -43,7 +43,7 @@
 - Mybatis Plus 3.0.5
 - SpringBoot 2.3.4
 - Mysql 5.7
-- Redis 3.0
+- Redis 3.0+
 - Swagger 2.7.0
 - Jwt Token
 
