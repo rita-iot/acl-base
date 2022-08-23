@@ -26,8 +26,8 @@ spring:
         min-idle: 0
 mybatis-plus:
   mapper-locations: mapper/*.xml
-  configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #打印日志
+#  configuration:
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #打印日志
 wechat:
   mpAppId: wxbbd0694ba9ff514a
   mpAppSecret: e7f32b7689fa6e83602558c66da165d2

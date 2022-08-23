@@ -1,5 +1,6 @@
 package com.base.example.primary.controller;
 
+import cn.hutool.core.date.DateUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.base.example.primary.entity.AclTask;
 import com.base.example.primary.service.AclTaskService;
@@ -14,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -56,16 +56,15 @@ public class AclTaskController {
     @PostMapping("add")
     @ApiOperation("新增")
     public Result add(@RequestBody AclTask aclTask) {
-        if (aclTask.getTaskId() == null) return Result.fail("id不能为空");
-        aclTask.setCreateTime(new Date());
+        aclTask.setCreateTime(DateUtil.date());
         aclTaskService.save(aclTask);
         return Result.ok();
     }
 
-    @PostMapping("updateById")
+    @PutMapping("updateById")
     @ApiOperation("修改")
     public Result updateById(@RequestBody AclTask aclTask) {
-        if (aclTask.getTaskId() == null) return Result.fail("emo语句不能为空");
+        if (aclTask.getTaskId() == null) return Result.fail("id不能为空");
         aclTaskService.updateById(aclTask);
         return Result.ok();
     }
@@ -80,6 +79,8 @@ public class AclTaskController {
     @ApiOperation("启动")
     @GetMapping("start/{taskId}")
     public Result start(@PathVariable("taskId") String taskId) {
+        AclTask aclTask = aclTaskService.getById(taskId);
+        if(aclTask.getTaskStatus() ==1) return Result.fail("当前任务已启用");
         testScheduler.start(taskId);
         return Result.ok();
 
@@ -88,6 +89,8 @@ public class AclTaskController {
     @ApiOperation("停止")
     @GetMapping("stop/{taskId}")
     public Result stop(@PathVariable("taskId") String taskId) {
+        AclTask aclTask = aclTaskService.getById(taskId);
+        if(aclTask.getTaskStatus() ==2) return Result.fail("当前任务未启用");
         testScheduler.stop(taskId);
         return Result.ok();
     }
@@ -100,7 +103,6 @@ public class AclTaskController {
         aclTaskService.updateById(task);
         //null值忽略
         List<String> ignoreProperties = new ArrayList<>(7);
-
         //反射获取Class的属性（Field表示类中的成员变量）
         for (Field field : task.getClass().getDeclaredFields()) {
             //获取授权
@@ -119,10 +121,8 @@ public class AclTaskController {
         //BeanUtils.copyProperties(task, AclTask, ignoreProperties.toArray(new String[0]));
         //tbTaskRepository.save(tbTask);
         TestScheduler.tasks.clear();
-
         //停止旧任务
         testScheduler.stop(task.getTaskId() + "");
-
         //重新启动
         testScheduler.start(task.getTaskId() + "");
         return Result.ok();

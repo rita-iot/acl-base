@@ -1,14 +1,15 @@
-package com.base.example.moning;
+package com.base.example.primary.taskScheduler;
 
 import cn.hutool.core.date.*;
 import cn.hutool.http.HttpUtil;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
+import com.base.example.primary.component.ApplicationContextGetBeanHelper;
+import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.bean.template.WxMpTemplateData;
 import me.chanjar.weixin.mp.bean.template.WxMpTemplateMessage;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
@@ -20,22 +21,24 @@ import java.util.Map;
 /**
  * @description: --
  * @author：Bing
- * @date：2022/8/22 13:34
+ * @date：2022/8/23 21:38
  * @version：1.0
  */
+@Slf4j
 @Component
-public class PushMessage {
-    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
-    @Autowired
-    private WxMpService wxMpService;
+public class PushMessageRunnable implements Runnable {
 
-    //@Scheduled(cron = "0/1 * * * * ? ")
-    @Scheduled(cron = "0 0 7 * * ? ")
-    public void pushMessage() throws Exception {
+
+    WxMpService wxMpService = ApplicationContextGetBeanHelper.getBean(WxMpService.class);
+
+
+    @SneakyThrows
+    @Override
+    public void run() {
         String openid1 = "oHKof5twBeeebCQMA7N9lcY1rc7k";
         String openid2 = "oHKof5tGm_oGV5rmvcN5v27n-9NQ";
         List<String> list = new ArrayList<>();
-        list.add(openid1);
+        //list.add(openid1);
         list.add(openid2);
         for (String openid : list) {
             WxMpTemplateMessage templateMessage = WxMpTemplateMessage.builder()
@@ -61,7 +64,7 @@ public class PushMessage {
 
             //3,如果是正式版发送消息，，这里需要配置你的信息
             templateMessage.addData(new WxMpTemplateData("first", now, "#009933"));
-            templateMessage.addData(new WxMpTemplateData("second", chineseDate.toString()+" "+week.toChinese(), "#003199"));
+            templateMessage.addData(new WxMpTemplateData("second", chineseDate.toString() + " " + week.toChinese(), "#003199"));
             templateMessage.addData(new WxMpTemplateData("keyword1", (String) weather.get("city"), "#009933"));
             templateMessage.addData(new WxMpTemplateData("keyword2", (String) weather.get("weather"), "#272727"));
             templateMessage.addData(new WxMpTemplateData("keyword3", (BigDecimal) weather.get("low") + "度", "#272727"));
@@ -71,10 +74,9 @@ public class PushMessage {
             templateMessage.addData(new WxMpTemplateData("keyword7", "今天又是想宝宝的一天!", "#009933"));
             templateMessage.addData(new WxMpTemplateData("keyword8", "记得签到哦!", "#ff0033"));
             String msg = wxMpService.getTemplateMsgService().sendTemplateMsg(templateMessage);
-            System.out.println(msg);
+            log.info("PushMessage running..."+msg);
         }
     }
-
     public static Map<String, Object> getWeather() {
         String wea_url = "https://autodev.openspeech.cn/csp/api/v2.1/weather?openId=aiuicus&clientType=android&sign=android&city=%E6%B1%9D%E5%B7%9E&needMoreData=true&pageNo=1&pageSize=1";
         String s = HttpUtil.get(wea_url);

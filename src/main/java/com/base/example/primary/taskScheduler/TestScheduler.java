@@ -1,6 +1,7 @@
 package com.base.example.primary.taskScheduler;
 
 import cn.hutool.core.date.DateUtil;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.base.example.primary.entity.AclTask;
 import com.base.example.primary.service.AclTaskService;
 import lombok.extern.slf4j.Slf4j;
@@ -53,6 +54,8 @@ public class TestScheduler {
     private void getAllAclTask() {
         //查询所有，并put到tasks
         //aclTaskService.tasks.clear();
+        QueryWrapper<AclTask> qw = new QueryWrapper<>();
+        qw.eq("task_status", 1);
         List<AclTask> list = aclTaskService.list();
         list.forEach((task) -> TestScheduler.tasks.put(task.getTaskId() + "", task));
     }
@@ -92,9 +95,12 @@ public class TestScheduler {
      * 根据定时任务id，停止定时任务
      */
     public void stop(String taskId) {
-        TestScheduler.runTasks.get(taskId).cancel(true);
-        TestScheduler.runTasks.remove(taskId);
-        this.updateTaskStatus(taskId, 0);
+        boolean b = TestScheduler.runTasks.containsKey(taskId);
+        if (b) {
+            TestScheduler.runTasks.get(taskId).cancel(true);
+            TestScheduler.runTasks.remove(taskId);
+        }
+        this.updateTaskStatus(taskId, 2);
         log.info("{}，任务停止...", taskId);
     }
 
@@ -105,6 +111,6 @@ public class TestScheduler {
         AclTask task = aclTaskService.getById(taskId);
         task.setTaskStatus(status);
         task.setUpdateTime(DateUtil.date());
-        aclTaskService.save(task);
+        aclTaskService.updateById(task);
     }
 }

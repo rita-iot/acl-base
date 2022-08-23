@@ -32,15 +32,16 @@ public class AclEmoController {
     @ApiOperation("查询所有")
     public Result list() {
         List<AclEmo> list = aclEmoService.findAll();
-
         return Result.ok(list);
     }
+
     @PostMapping("page")
     @ApiOperation("分页")
     public ResultPage page(@RequestBody AclEmo aclEmo) {
         IPage<AclEmo> list = aclEmoService.page(aclEmo);
         return ResultPage.ok(list);
     }
+
     @GetMapping("getById/{id}")
     @ApiOperation("根据id查询")
     public Result getById(@PathVariable Integer id) {
@@ -56,6 +57,7 @@ public class AclEmoController {
         aclEmoService.save(aclEmo);
         return Result.ok();
     }
+
     @PostMapping("updateById")
     @ApiOperation("修改")
     public Result updateById(@RequestBody AclEmo aclEmo) {
@@ -63,6 +65,7 @@ public class AclEmoController {
         aclEmoService.updateById(aclEmo);
         return Result.ok();
     }
+
     @ApiOperation("删除")
     @DeleteMapping("del/{id}")
     public Result del(@PathVariable Integer id) {
