@@ -1,6 +1,7 @@
 package com.base.example.primary.controller;
 
 import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.lang.tree.Tree;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.base.example.primary.entity.AclDept;
 import com.base.example.primary.service.AclDeptService;
@@ -69,5 +70,13 @@ public class DeptController {
     public Result del(@PathVariable Integer id) {
         aclDeptService.removeById(id);
         return Result.ok();
+    }
+
+    @PostMapping("tree")
+    @ApiOperation("树行结构")
+    public Result menuTree(@RequestBody AclDept aclDept) {
+        //if(sysMenu.getType() == null) return Result.fail("type不能为空");
+        List<Tree<String>> tree = aclDeptService.tree(aclDept);
+        return Result.ok(tree);
     }
 }

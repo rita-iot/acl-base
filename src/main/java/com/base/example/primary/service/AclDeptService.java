@@ -1,8 +1,11 @@
 package com.base.example.primary.service;
 
+import cn.hutool.core.lang.tree.Tree;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.base.example.primary.entity.AclDept;
 import com.baomidou.mybatisplus.extension.service.IService;
+
+import java.util.List;
 
 /**
  * @description: --
@@ -18,4 +21,11 @@ public interface AclDeptService extends IService<AclDept> {
      * @return
      */
     IPage<AclDept> findBypage(AclDept aclDept);
+
+    /**
+     * 树结构
+     * @param aclDept
+     * @return
+     */
+    List<Tree<String>> tree(AclDept aclDept);
 }
