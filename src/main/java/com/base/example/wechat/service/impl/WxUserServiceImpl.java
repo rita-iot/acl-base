@@ -1,12 +1,23 @@
 package com.base.example.wechat.service.impl;
 
+import cn.hutool.core.bean.BeanUtil;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.base.example.wechat.entity.WxUser;
 import com.base.example.wechat.mapper.WxUserMapper;
 import com.base.example.wechat.service.WxUserService;
+import me.chanjar.weixin.common.error.WxErrorException;
+import me.chanjar.weixin.mp.api.WxMpService;
+import me.chanjar.weixin.mp.bean.WxMpUserQuery;
+import me.chanjar.weixin.mp.bean.result.WxMpUser;
+import me.chanjar.weixin.mp.bean.result.WxMpUserList;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Date;
+import java.util.List;
 
 /**
  * @description: --
@@ -18,6 +29,40 @@ import javax.annotation.Resource;
 public class WxUserServiceImpl extends ServiceImpl<WxUserMapper, WxUser> implements WxUserService {
     @Resource
     private WxUserMapper wxUserMapper;
+    @Autowired
+    private WxMpService wxMpService;
+
+    @Override
+    public IPage<WxUser> findBypage(WxUser wxUser) {
+        return null;
+    }
+
+    @Override
+    public void syncUserList() {
+        WxMpUserList wxMpUserList = null;
+        try {
+            wxMpUserList = wxMpService.getUserService().userList(null);
+            List<String> openids = wxMpUserList.getOpenids();
+            WxMpUserQuery wxMpUserQuery = new WxMpUserQuery();
+            //wxMpUserQuery.
+            List<WxMpUser> wxMpUsers = wxMpService.getUserService().userInfoList(openids);
+            for (WxMpUser wxMpUser : wxMpUsers) {
+                Date date = new Date(wxMpUser.getSubscribeTime());
+                WxUser wxUser = new WxUser();
+                BeanUtil.copyProperties(wxMpUser, wxUser);
+                wxUser.setSubscribeTime(date);
+                QueryWrapper<WxUser> qw = new QueryWrapper<>();
+                qw.eq("open_id", wxMpUser.getOpenId());
+                WxUser one = this.getOne(qw, false);
+                if (one == null) {
+                    this.save(wxUser);
+                }
+            }
+        } catch (WxErrorException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
 }
 
 

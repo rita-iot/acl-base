@@ -1,7 +1,8 @@
 package com.base.example.wechat.service;
 
-import com.base.example.wechat.entity.WxUser;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.base.example.wechat.entity.WxUser;
 
 /**
  * @description: --
@@ -11,7 +12,17 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface WxUserService extends IService<WxUser> {
 
+    /**
+     * 分页查询
+     * @param wxUser
+     * @return
+     */
+    IPage<WxUser> findBypage(WxUser wxUser);
 
+    /**
+     * 同步用户列表
+     */
+    void syncUserList();
 }
 
 

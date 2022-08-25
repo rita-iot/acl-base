@@ -10,7 +10,6 @@ import me.chanjar.weixin.mp.bean.WxMpUserQuery;
 import me.chanjar.weixin.mp.bean.result.WxMpUser;
 import me.chanjar.weixin.mp.bean.result.WxMpUserList;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -29,7 +28,7 @@ public class InitWxOpenId {
     @Autowired
     private WxUserService wxUserService;
 
-    @Scheduled(cron = "0/1 * * * * ? ")
+    //@Scheduled(cron = "0/1 * * * * ? ")
     public void getOpenId() throws WxErrorException {
         WxMpUserList wxMpUserList = wxMpService.getUserService().userList(null);
         List<String> openids = wxMpUserList.getOpenids();
