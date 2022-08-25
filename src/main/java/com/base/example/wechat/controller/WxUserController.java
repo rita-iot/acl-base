@@ -43,7 +43,7 @@ public class WxUserController {
 
     @GetMapping("getById/{id}")
     @ApiOperation("根据id查询")
-    public Result getById(@PathVariable Integer id) {
+    public Result getById(@PathVariable String id) {
         WxUser wxUser = wxUserService.getById(id);
         return Result.ok(wxUser);
     }

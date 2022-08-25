@@ -4,24 +4,23 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.base.example.primary.entity.BaseEntity;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import java.io.Serializable;
-import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+import java.util.Date;
+
 /**
  * @description: --
  * @author：Bing
- * @date：2022/8/25 17:17
+ * @date：2022/8/25 21:02
  * @version：1.0
- */
-
-/**
- * wx_user
  */
 @ApiModel(value = "wx_user")
 @Data
@@ -29,7 +28,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @TableName(value = "wx_user")
-public class WxUser implements Serializable {
+public class WxUser extends BaseEntity implements Serializable {
     /**
      * 用户的标识，对当前公众号唯一
      */
@@ -117,9 +116,17 @@ public class WxUser implements Serializable {
     /**
      * 创建时间
      */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @TableField(value = "create_time")
     @ApiModelProperty(value = "创建时间")
     private Date createTime;
+
+    /**
+     * 状态 1 启用 2禁用
+     */
+    @TableField(value = "`status`")
+    @ApiModelProperty(value = "状态 1 启用 2禁用")
+    private Integer status;
 
     private static final long serialVersionUID = 1L;
 }

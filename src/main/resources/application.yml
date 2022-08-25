@@ -20,7 +20,7 @@ spring:
       # 并发效率会有所下降，如果需要可以通过配置useUnfairLock属性为true使用非公平锁。
       max-wait: 60000
       # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
-      time-between-eviction-runs-millis: 60000
+      time-between-eviction-runs-millis: 6000
       # 配置一个连接在池中最小生存的时间，单位是毫秒
       min-evictable-idle-time-millis: 180000
       # 用来检测连接是否有效的sql，要求是一个查询语句。如果validationQuery为null，testOnBorrow、testOnReturn、testWhileIdle都不会其作用。
@@ -51,13 +51,13 @@ spring:
     port: 8082
     password: 4redis@Invariable
     database: 1
-    timeout: 5000
+    timeout: 500000
     lettuce:
       pool:
         max-active: 20
         max-wait: -1
-        max-idle: 5
-        min-idle: 0
+        max-idle: 20
+        min-idle: 10
 mybatis-plus:
   mapper-locations: mapper/*.xml
 #  configuration:

@@ -3,6 +3,7 @@ package com.base.example.wechat.service.impl;
 import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.base.example.wechat.entity.WxUser;
 import com.base.example.wechat.mapper.WxUserMapper;
@@ -34,7 +35,10 @@ public class WxUserServiceImpl extends ServiceImpl<WxUserMapper, WxUser> impleme
 
     @Override
     public IPage<WxUser> findBypage(WxUser wxUser) {
-        return null;
+        IPage<WxUser> iPage = new Page<>(wxUser.getCurrentPage(), wxUser.getPageSize());
+        QueryWrapper<WxUser> qw = new QueryWrapper<>();
+        qw.orderByDesc("create_time");
+        return this.page(iPage, qw);
     }
 
     @Override

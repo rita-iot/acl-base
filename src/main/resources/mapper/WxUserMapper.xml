@@ -17,10 +17,11 @@
     <result column="remark" jdbcType="VARCHAR" property="remark" />
     <result column="group_id" jdbcType="INTEGER" property="groupId" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="status" jdbcType="INTEGER" property="status" />
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
     open_id, nickname, sex_desc, sex, `language`, city, province, country, head_img_url, 
-    subscribe_time, remark, group_id, create_time
+    subscribe_time, remark, group_id, create_time, `status`
   </sql>
 </mapper>
