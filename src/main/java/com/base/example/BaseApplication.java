@@ -20,7 +20,7 @@ import java.net.UnknownHostException;
 @SpringBootApplication
 @EnableAsync
 @EnableScheduling
-@MapperScan(basePackages = {"com.base.example.primary.mapper"})
+@MapperScan(basePackages = {"com.base.example.primary.mapper","com.base.example.wechat.mapper"})
 //@ComponentScan(basePackages = {"com.base.example"})
 public class BaseApplication {
     private static final Logger log = LoggerFactory.getLogger(BaseApplication.class);

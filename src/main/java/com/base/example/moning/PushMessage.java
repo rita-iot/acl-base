@@ -25,7 +25,6 @@ import java.util.Map;
  */
 @Component
 public class PushMessage {
-    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     @Autowired
     private WxMpService wxMpService;
 
