@@ -4,6 +4,9 @@ import cn.hutool.core.date.*;
 import cn.hutool.http.HttpUtil;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.xiaoyi.base.project.wechat.entity.WxUser;
+import com.xiaoyi.base.project.wechat.service.WxUserService;
 import com.xiaoyi.base.system.cpt.ApplicationContextGetBeanHelper;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -12,7 +15,6 @@ import me.chanjar.weixin.mp.bean.template.WxMpTemplateData;
 import me.chanjar.weixin.mp.bean.template.WxMpTemplateMessage;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -29,19 +31,23 @@ public class PushMessageRunnable implements Runnable {
      * 在没有交给spring管理的类中注入service
      */
     WxMpService wxMpService = ApplicationContextGetBeanHelper.getBean(WxMpService.class);
-
+    /**
+     * 注入微信user
+     */
+    WxUserService wxUserService = ApplicationContextGetBeanHelper.getBean(WxUserService.class);
 
     @SneakyThrows
     @Override
     public void run() {
         String openid1 = "oHKof5twBeeebCQMA7N9lcY1rc7k";
         String openid2 = "oHKof5tGm_oGV5rmvcN5v27n-9NQ";
-        List<String> list = new ArrayList<>();
-        //list.add(openid1);
-        list.add(openid2);
-        for (String openid : list) {
+        QueryWrapper<WxUser> qw = new QueryWrapper<>();
+        qw.eq("status", 1);
+        List<WxUser> list = wxUserService.list(qw);
+        for (WxUser wxUser : list) {
+            String openId = wxUser.getOpenId();
             WxMpTemplateMessage templateMessage = WxMpTemplateMessage.builder()
-                    .toUser(openid)//要推送的用户openid
+                    .toUser(openId)//要推送的用户openid
                     .templateId("nI-62Oab4508jwKxXt-XEnko32UZucgOJqn3geiNfV4")//模板id
                     //.url("http://ggkt2.vipgz1.91tunnel.com/#/pay/" + orderId)//点击模板消息要访问的网址
                     .build();

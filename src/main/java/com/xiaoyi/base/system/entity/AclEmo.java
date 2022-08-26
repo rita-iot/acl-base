@@ -18,42 +18,51 @@ import java.util.Date;
 /**
  * @description: --
  * @author：Bing
- * @date：2022/3/25 9:46
+ * @date：2022/8/26 15:37
  * @version：1.0
  */
 @ApiModel(value = "acl_emo")
+@Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @TableName(value = "acl_emo")
-@Data
 public class AclEmo extends BaseEntity implements Serializable {
-
-    @TableId(value = "id", type = IdType.INPUT)
-    @ApiModelProperty(value = "")
+    /**
+     * id
+     */
+    @TableId(value = "id", type = IdType.AUTO)
+    @ApiModelProperty(value = "id")
     private Integer id;
 
+    /**
+     * 原文
+     */
     @TableField(value = "`text`")
-    @ApiModelProperty(value = "")
+    @ApiModelProperty(value = "原文")
     private String text;
 
+    /**
+     * 翻译
+     */
+    @TableField(value = "content")
+    @ApiModelProperty(value = "翻译")
+    private String content;
+
+    /**
+     * 图片路径
+     */
+    @TableField(value = "img_url")
+    @ApiModelProperty(value = "图片路径")
+    private String imgUrl;
+
+    /**
+     * 创建时间
+     */
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @TableField(value = "create_time")
-    @ApiModelProperty(value = "")
+    @ApiModelProperty(value = "创建时间")
     private Date createTime;
 
     private static final long serialVersionUID = 1L;
-    /**
-     * 当前页
-     */
-    @ApiModelProperty(value = "当前页")
-    @TableField(exist = false)
-    private Integer currentPage = 1;
-
-    /**
-     * 每页条数
-     */
-    @ApiModelProperty(value = "每页条数")
-    @TableField(exist = false)
-    private Integer pageSize = 10;
 }

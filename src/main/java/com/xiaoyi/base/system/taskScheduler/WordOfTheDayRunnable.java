@@ -8,9 +8,12 @@ import cn.hutool.http.HttpUtil;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.xiaoyi.base.system.cpt.ApplicationContextGetBeanHelper;
+import com.xiaoyi.base.core.redis.RedisService;
 import com.xiaoyi.base.project.wechat.entity.WxUser;
 import com.xiaoyi.base.project.wechat.service.WxUserService;
+import com.xiaoyi.base.system.cpt.ApplicationContextGetBeanHelper;
+import com.xiaoyi.base.system.entity.AclEmo;
+import com.xiaoyi.base.system.service.AclEmoService;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.mp.api.WxMpService;
@@ -32,6 +35,8 @@ public class WordOfTheDayRunnable implements Runnable {
      */
     WxMpService wxMpService = ApplicationContextGetBeanHelper.getBean(WxMpService.class);
     WxUserService wxUserService = ApplicationContextGetBeanHelper.getBean(WxUserService.class);
+    AclEmoService aclEmoService = ApplicationContextGetBeanHelper.getBean(AclEmoService.class);
+    RedisService redisService = ApplicationContextGetBeanHelper.getBean(RedisService.class);
 
     @SneakyThrows
     @Override
@@ -72,6 +77,18 @@ public class WordOfTheDayRunnable implements Runnable {
             //templateMessage.addData(new WxMpTemplateData("keyword8", "记得签到哦!", "#ff0033"));
             String msg = wxMpService.getTemplateMsgService().sendTemplateMsg(templateMessage);
             log.info("WordOfTheDayRunnable running..." + msg);
+        }
+        // 设置1天保存一次
+        Boolean aclEmoSave = redisService.hasKey("aclEmoSave");
+        if (aclEmoSave) {
+            log.info("当天已保存过，不在保存");
+        } else {
+            AclEmo aclEmo = new AclEmo();
+            aclEmo.setText(note);
+            aclEmo.setContent(content);
+            aclEmo.setImgUrl(picture2);
+            aclEmoService.save(aclEmo);
+            redisService.set("aclEmoSave", 86400);
         }
     }
 }

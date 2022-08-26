@@ -7,10 +7,14 @@ import org.apache.ibatis.annotations.Mapper;import java.util.List;
 /**
  * @description: --
  * @author：Bing
- * @date：2022/3/25 9:46
+ * @date：2022/8/26 15:37
  * @version：1.0
  */
 @Mapper
 public interface AclEmoMapper extends BaseMapper<AclEmo> {
+    /**
+     * 查找所有
+     * @return
+     */
     List<AclEmo> findAll();
 }
