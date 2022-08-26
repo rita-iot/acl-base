@@ -56,6 +56,8 @@ public class AclTaskController {
     @PostMapping("add")
     @ApiOperation("新增")
     public Result add(@RequestBody AclTask aclTask) {
+        String trim = aclTask.getTaskExp().trim();
+        aclTask.setTaskExp(trim);
         aclTask.setCreateTime(DateUtil.date());
         aclTaskService.save(aclTask);
         return Result.ok();
@@ -65,6 +67,8 @@ public class AclTaskController {
     @ApiOperation("修改")
     public Result updateById(@RequestBody AclTask aclTask) {
         if (aclTask.getTaskId() == null) return Result.fail("id不能为空");
+        String trim = aclTask.getTaskExp().trim();
+        aclTask.setTaskExp(trim);
         aclTaskService.updateById(aclTask);
         return Result.ok();
     }
@@ -80,7 +84,7 @@ public class AclTaskController {
     @GetMapping("start/{taskId}")
     public Result start(@PathVariable("taskId") String taskId) {
         AclTask aclTask = aclTaskService.getById(taskId);
-        if(aclTask.getTaskStatus() ==1) return Result.fail("当前任务已启用");
+        if (aclTask.getTaskStatus() == 1) return Result.fail("当前任务已启用");
         coreScheduler.start(taskId);
         return Result.ok();
 
@@ -90,7 +94,7 @@ public class AclTaskController {
     @GetMapping("stop/{taskId}")
     public Result stop(@PathVariable("taskId") String taskId) {
         AclTask aclTask = aclTaskService.getById(taskId);
-        if(aclTask.getTaskStatus() ==2) return Result.fail("当前任务未启用");
+        if (aclTask.getTaskStatus() == 2) return Result.fail("当前任务未启用");
         coreScheduler.stop(taskId);
         return Result.ok();
     }

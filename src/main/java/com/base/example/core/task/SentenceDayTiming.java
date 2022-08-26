@@ -10,7 +10,6 @@ import com.base.example.qywx.Articles;
 import com.base.example.qywx.News;
 import com.base.example.qywx.QywxMessageVo;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -42,7 +41,7 @@ public class SentenceDayTiming {
     /**
      * 每日一句 每天7点半推送
      */
-    @Scheduled(cron = "0 40 7 * * ? ")
+    //@Scheduled(cron = "0 40 7 * * ? ")
     public void sentenceDay() {
         DateTime date = DateUtil.date();
         String format = DateUtil.format(date, "yyyy-MM-dd");
