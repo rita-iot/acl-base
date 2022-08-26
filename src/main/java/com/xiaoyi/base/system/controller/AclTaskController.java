@@ -71,7 +71,9 @@ public class AclTaskController {
         //停止旧任务
         coreScheduler.stop(aclTask);
         //重新启动
-        coreScheduler.start(aclTask);
+        if (aclTask.getTaskStatus() == 1) {
+            coreScheduler.start(aclTask);
+        }
         return Result.ok();
     }
 
