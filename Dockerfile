@@ -1,5 +1,5 @@
 #指定JDK版本
-FROM registry.cn-hangzhou.aliyuncs.com/jubo/openjdk:8
+FROM registry.cn-hangzhou.aliyuncs.com/jubo/openjdk:11
 
 
 ENV HOME /home/server
