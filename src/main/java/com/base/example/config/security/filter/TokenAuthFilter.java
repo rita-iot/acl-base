@@ -74,7 +74,7 @@ public class TokenAuthFilter extends BasicAuthenticationFilter {
             Date expirationDateFromToken = tokenManager.getExpirationDateFromToken(token);
             SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
             String format = sd.format(expirationDateFromToken);
-            logger.info("当前token过期时间：" + format);
+            //logger.info("当前token过期时间：" + format);
             //从token获取用户名
             String username = tokenManager.getUserInfoFromToken(token);
             //从redis获取对应权限列表
