@@ -10,7 +10,6 @@ import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.bean.template.WxMpTemplateData;
 import me.chanjar.weixin.mp.bean.template.WxMpTemplateMessage;
-import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -25,10 +24,10 @@ import java.util.Map;
  * @version：1.0
  */
 @Slf4j
-@Component
 public class PushMessageRunnable implements Runnable {
-
-
+    /**
+     * 在没有交给spring管理的类中注入service
+     */
     WxMpService wxMpService = ApplicationContextGetBeanHelper.getBean(WxMpService.class);
 
 
@@ -74,9 +73,10 @@ public class PushMessageRunnable implements Runnable {
             templateMessage.addData(new WxMpTemplateData("keyword7", "今天又是想宝宝的一天!", "#009933"));
             templateMessage.addData(new WxMpTemplateData("keyword8", "记得签到哦!", "#ff0033"));
             String msg = wxMpService.getTemplateMsgService().sendTemplateMsg(templateMessage);
-            log.info("PushMessage running..."+msg);
+            log.info("PushMessageRunnable running..." + msg);
         }
     }
+
     public static Map<String, Object> getWeather() {
         String wea_url = "https://autodev.openspeech.cn/csp/api/v2.1/weather?openId=aiuicus&clientType=android&sign=android&city=%E6%B1%9D%E5%B7%9E&needMoreData=true&pageNo=1&pageSize=1";
         String s = HttpUtil.get(wea_url);

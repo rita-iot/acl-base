@@ -4,7 +4,7 @@ import cn.hutool.core.date.DateUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.base.example.primary.entity.AclTask;
 import com.base.example.primary.service.AclTaskService;
-import com.base.example.primary.taskScheduler.TestScheduler;
+import com.base.example.primary.taskScheduler.CoreScheduler;
 import com.base.example.utils.Result;
 import com.base.example.utils.ResultPage;
 import io.swagger.annotations.Api;
@@ -30,7 +30,7 @@ public class AclTaskController {
     @Autowired
     private AclTaskService aclTaskService;
     @Resource
-    private TestScheduler testScheduler;
+    private CoreScheduler coreScheduler;
 
     @PostMapping("page")
     @ApiOperation("分页")
@@ -81,7 +81,7 @@ public class AclTaskController {
     public Result start(@PathVariable("taskId") String taskId) {
         AclTask aclTask = aclTaskService.getById(taskId);
         if(aclTask.getTaskStatus() ==1) return Result.fail("当前任务已启用");
-        testScheduler.start(taskId);
+        coreScheduler.start(taskId);
         return Result.ok();
 
     }
@@ -91,7 +91,7 @@ public class AclTaskController {
     public Result stop(@PathVariable("taskId") String taskId) {
         AclTask aclTask = aclTaskService.getById(taskId);
         if(aclTask.getTaskStatus() ==2) return Result.fail("当前任务未启用");
-        testScheduler.stop(taskId);
+        coreScheduler.stop(taskId);
         return Result.ok();
     }
 
@@ -120,11 +120,11 @@ public class AclTaskController {
         //org.springframework.beans BeanUtils.copyProperties(A,B)：A中的值付给B
         //BeanUtils.copyProperties(task, AclTask, ignoreProperties.toArray(new String[0]));
         //tbTaskRepository.save(tbTask);
-        TestScheduler.tasks.clear();
+        CoreScheduler.tasks.clear();
         //停止旧任务
-        testScheduler.stop(task.getTaskId() + "");
+        coreScheduler.stop(task.getTaskId() + "");
         //重新启动
-        testScheduler.start(task.getTaskId() + "");
+        coreScheduler.start(task.getTaskId() + "");
         return Result.ok();
     }
 }

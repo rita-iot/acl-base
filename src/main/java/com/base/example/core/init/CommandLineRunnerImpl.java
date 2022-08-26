@@ -3,7 +3,7 @@ package com.base.example.core.init;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.base.example.primary.entity.AclTask;
 import com.base.example.primary.service.AclTaskService;
-import com.base.example.primary.taskScheduler.TestScheduler;
+import com.base.example.primary.taskScheduler.CoreScheduler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +24,7 @@ public class CommandLineRunnerImpl implements CommandLineRunner {
     @Autowired
     private AclTaskService aclTaskService;
     @Autowired
-    private TestScheduler testScheduler;
+    private CoreScheduler coreScheduler;
 
     @Override
     public void run(String... args) throws Exception {
@@ -40,7 +40,7 @@ public class CommandLineRunnerImpl implements CommandLineRunner {
         qw.eq("task_status", 1);
         List<AclTask> list = aclTaskService.list(qw);
         for (AclTask aclTask : list) {
-            testScheduler.start(aclTask.getTaskId() + "");
+            coreScheduler.start(aclTask.getTaskId() + "");
         }
     }
 }

@@ -23,7 +23,7 @@ import java.util.concurrent.ScheduledFuture;
  */
 @Slf4j
 @Component
-public class TestScheduler {
+public class CoreScheduler {
 
     //数据库的任务
     public static ConcurrentHashMap<String, AclTask> tasks = new ConcurrentHashMap<>(10);
@@ -41,7 +41,7 @@ public class TestScheduler {
      * 初始化线程池任务调度
      */
     @Autowired
-    public TestScheduler() {
+    public CoreScheduler() {
         this.threadPoolTaskScheduler.setPoolSize(10);
         this.threadPoolTaskScheduler.setThreadNamePrefix("task-thread-");
         this.threadPoolTaskScheduler.setWaitForTasksToCompleteOnShutdown(true);
@@ -57,7 +57,7 @@ public class TestScheduler {
         QueryWrapper<AclTask> qw = new QueryWrapper<>();
         qw.eq("task_status", 1);
         List<AclTask> list = aclTaskService.list();
-        list.forEach((task) -> TestScheduler.tasks.put(task.getTaskId() + "", task));
+        list.forEach((task) -> CoreScheduler.tasks.put(task.getTaskId() + "", task));
     }
 
     /**
@@ -66,10 +66,10 @@ public class TestScheduler {
     public void start(String taskId) {
         try {
             //如果为空，重新获取
-            if (TestScheduler.tasks.size() <= 0) {
+            if (CoreScheduler.tasks.size() <= 0) {
                 this.getAllAclTask();
             }
-            AclTask tbTask = TestScheduler.tasks.get(taskId);
+            AclTask tbTask = CoreScheduler.tasks.get(taskId);
 
             //获取并实例化Runnable任务类
             Class<?> clazz = Class.forName(tbTask.getTaskClass());
@@ -79,7 +79,7 @@ public class TestScheduler {
             CronTrigger cron = new CronTrigger(tbTask.getTaskExp());
 
             //执行，并put到runTasks
-            TestScheduler.runTasks.put(taskId, Objects.requireNonNull(this.threadPoolTaskScheduler.schedule(runnable, cron)));
+            CoreScheduler.runTasks.put(taskId, Objects.requireNonNull(this.threadPoolTaskScheduler.schedule(runnable, cron)));
 
             this.updateTaskStatus(taskId, 1);
 
@@ -95,10 +95,10 @@ public class TestScheduler {
      * 根据定时任务id，停止定时任务
      */
     public void stop(String taskId) {
-        boolean b = TestScheduler.runTasks.containsKey(taskId);
+        boolean b = CoreScheduler.runTasks.containsKey(taskId);
         if (b) {
-            TestScheduler.runTasks.get(taskId).cancel(true);
-            TestScheduler.runTasks.remove(taskId);
+            CoreScheduler.runTasks.get(taskId).cancel(true);
+            CoreScheduler.runTasks.remove(taskId);
         }
         this.updateTaskStatus(taskId, 2);
         log.info("{}，任务停止...", taskId);
