@@ -78,6 +78,8 @@ public class AclTaskController {
     @ApiOperation("删除")
     @DeleteMapping("del/{id}")
     public Result del(@PathVariable Integer id) {
+        AclTask aclTask = aclTaskService.getById(id);
+        if (aclTask.getTaskStatus() == 1) return Result.fail("请先停止任务");
         aclTaskService.removeById(id);
         return Result.ok();
     }
