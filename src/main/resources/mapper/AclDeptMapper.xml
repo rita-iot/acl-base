@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.base.example.primary.mapper.AclDeptMapper">
-    <resultMap id="BaseResultMap" type="com.base.example.primary.entity.AclDept">
+<mapper namespace="com.xiaoyi.base.system.mapper.AclDeptMapper">
+    <resultMap id="BaseResultMap" type="com.xiaoyi.base.system.entity.AclDept">
         <!--@mbg.generated--><!--@Table acl_dept-->
         <id column="dept_id" jdbcType="INTEGER" property="deptId"/>
         <result column="parent_id" jdbcType="INTEGER" property="parentId"/>

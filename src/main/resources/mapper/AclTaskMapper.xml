@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.base.example.primary.mapper.AclTaskMapper">
-  <resultMap id="BaseResultMap" type="com.base.example.primary.entity.AclTask">
+<mapper namespace="com.xiaoyi.base.system.mapper.AclTaskMapper">
+  <resultMap id="BaseResultMap" type="com.xiaoyi.base.system.entity.AclTask">
     <!--@mbg.generated-->
     <!--@Table acl_task-->
     <id column="task_id" jdbcType="INTEGER" property="taskId" />
