@@ -40,7 +40,7 @@ public class CommandLineRunnerImpl implements CommandLineRunner {
         qw.eq("task_status", 1);
         List<AclTask> list = aclTaskService.list(qw);
         for (AclTask aclTask : list) {
-            coreScheduler.start(aclTask.getTaskId() + "");
+            coreScheduler.start(aclTask);
         }
     }
 }

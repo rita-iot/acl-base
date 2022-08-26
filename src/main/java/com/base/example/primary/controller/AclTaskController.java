@@ -85,7 +85,7 @@ public class AclTaskController {
     public Result start(@PathVariable("taskId") String taskId) {
         AclTask aclTask = aclTaskService.getById(taskId);
         if (aclTask.getTaskStatus() == 1) return Result.fail("当前任务已启用");
-        coreScheduler.start(taskId);
+        coreScheduler.start(aclTask);
         return Result.ok();
 
     }
@@ -95,7 +95,7 @@ public class AclTaskController {
     public Result stop(@PathVariable("taskId") String taskId) {
         AclTask aclTask = aclTaskService.getById(taskId);
         if (aclTask.getTaskStatus() == 2) return Result.fail("当前任务未启用");
-        coreScheduler.stop(taskId);
+        coreScheduler.stop(aclTask);
         return Result.ok();
     }
 
@@ -124,11 +124,11 @@ public class AclTaskController {
         //org.springframework.beans BeanUtils.copyProperties(A,B)：A中的值付给B
         //BeanUtils.copyProperties(task, AclTask, ignoreProperties.toArray(new String[0]));
         //tbTaskRepository.save(tbTask);
-        CoreScheduler.tasks.clear();
+        //CoreScheduler.tasks.clear();
         //停止旧任务
-        coreScheduler.stop(task.getTaskId() + "");
+        coreScheduler.stop(task);
         //重新启动
-        coreScheduler.start(task.getTaskId() + "");
+        coreScheduler.start(task);
         return Result.ok();
     }
 }

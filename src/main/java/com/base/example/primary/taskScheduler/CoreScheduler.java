@@ -1,7 +1,6 @@
 package com.base.example.primary.taskScheduler;
 
 import cn.hutool.core.date.DateUtil;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.base.example.primary.entity.AclTask;
 import com.base.example.primary.service.AclTaskService;
 import lombok.extern.slf4j.Slf4j;
@@ -10,7 +9,6 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.scheduling.support.CronTrigger;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ScheduledFuture;
@@ -24,18 +22,16 @@ import java.util.concurrent.ScheduledFuture;
 @Slf4j
 @Component
 public class CoreScheduler {
-
+    @Autowired
+    private AclTaskService aclTaskService;
     //数据库的任务
-    public static ConcurrentHashMap<String, AclTask> tasks = new ConcurrentHashMap<>(10);
+    //public static ConcurrentHashMap<String, AclTask> tasks = new ConcurrentHashMap<>(10);
 
     //正在运行的任务
     public static ConcurrentHashMap<String, ScheduledFuture> runTasks = new ConcurrentHashMap<>(10);
 
     //线程池任务调度
     private ThreadPoolTaskScheduler threadPoolTaskScheduler = new ThreadPoolTaskScheduler();
-
-    @Autowired
-    private AclTaskService aclTaskService;
 
     /**
      * 初始化线程池任务调度
@@ -48,40 +44,25 @@ public class CoreScheduler {
         this.threadPoolTaskScheduler.initialize();
     }
 
-    /**
-     * 获取所有数据库里的定时任务
-     */
-    private void getAllAclTask() {
-        //查询所有，并put到tasks
-        //aclTaskService.tasks.clear();
-        QueryWrapper<AclTask> qw = new QueryWrapper<>();
-        qw.eq("task_status", 1);
-        List<AclTask> list = aclTaskService.list();
-        list.forEach((task) -> CoreScheduler.tasks.put(task.getTaskId() + "", task));
-    }
 
     /**
      * 根据定时任务id，启动定时任务
      */
-    public void start(String taskId) {
+    public void start(AclTask aclTask) {
+        Integer taskId = aclTask.getTaskId();
         try {
-            //如果为空，重新获取
-            if (CoreScheduler.tasks.size() <= 0) {
-                this.getAllAclTask();
-            }
-            AclTask tbTask = CoreScheduler.tasks.get(taskId);
-
+            //AclTask tbTask = aclTaskService.getById(taskId);
             //获取并实例化Runnable任务类
-            Class<?> clazz = Class.forName(tbTask.getTaskClass());
+            Class<?> clazz = Class.forName(aclTask.getTaskClass());
             Runnable runnable = (Runnable) clazz.newInstance();
 
             //Cron表达式
-            CronTrigger cron = new CronTrigger(tbTask.getTaskExp());
+            CronTrigger cron = new CronTrigger(aclTask.getTaskExp());
 
             //执行，并put到runTasks
-            CoreScheduler.runTasks.put(taskId, Objects.requireNonNull(this.threadPoolTaskScheduler.schedule(runnable, cron)));
+            CoreScheduler.runTasks.put(taskId + "", Objects.requireNonNull(this.threadPoolTaskScheduler.schedule(runnable, cron)));
 
-            this.updateTaskStatus(taskId, 1);
+            this.updateTaskStatus(taskId + "", 1);
 
             log.info("{}，任务启动！", taskId);
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
@@ -94,10 +75,12 @@ public class CoreScheduler {
     /**
      * 根据定时任务id，停止定时任务
      */
-    public void stop(String taskId) {
+    public void stop(AclTask aclTask) {
+        String taskId = String.valueOf(aclTask.getTaskId());
         boolean b = CoreScheduler.runTasks.containsKey(taskId);
         if (b) {
             CoreScheduler.runTasks.get(taskId).cancel(true);
+            ScheduledFuture scheduledFuture = CoreScheduler.runTasks.get(taskId);
             CoreScheduler.runTasks.remove(taskId);
         }
         this.updateTaskStatus(taskId, 2);
