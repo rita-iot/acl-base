@@ -13,8 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.lang.reflect.Field;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -70,6 +68,10 @@ public class AclTaskController {
         String trim = aclTask.getTaskExp().trim();
         aclTask.setTaskExp(trim);
         aclTaskService.updateById(aclTask);
+        //停止旧任务
+        coreScheduler.stop(aclTask);
+        //重新启动
+        coreScheduler.start(aclTask);
         return Result.ok();
     }
 
@@ -96,39 +98,6 @@ public class AclTaskController {
         AclTask aclTask = aclTaskService.getById(taskId);
         if (aclTask.getTaskStatus() == 2) return Result.fail("当前任务未启用");
         coreScheduler.stop(aclTask);
-        return Result.ok();
-    }
-
-    @ApiOperation("更新定时任务")
-    @PostMapping("updateTask")
-    public Result save(@RequestBody AclTask task) throws IllegalAccessException {
-        //先更新表数据
-        //AclTask tbTask = aclTaskService.getById(task.getTaskId());
-        aclTaskService.updateById(task);
-        //null值忽略
-        List<String> ignoreProperties = new ArrayList<>(7);
-        //反射获取Class的属性（Field表示类中的成员变量）
-        for (Field field : task.getClass().getDeclaredFields()) {
-            //获取授权
-            field.setAccessible(true);
-            //属性名称
-            String fieldName = field.getName();
-            //属性的值
-            Object fieldValue = field.get(task);
-            //找出值为空的属性，我们复制的时候不进行赋值
-            if (null == fieldValue) {
-                ignoreProperties.add(fieldName);
-            }
-        }
-
-        //org.springframework.beans BeanUtils.copyProperties(A,B)：A中的值付给B
-        //BeanUtils.copyProperties(task, AclTask, ignoreProperties.toArray(new String[0]));
-        //tbTaskRepository.save(tbTask);
-        //CoreScheduler.tasks.clear();
-        //停止旧任务
-        coreScheduler.stop(task);
-        //重新启动
-        coreScheduler.start(task);
         return Result.ok();
     }
 }
