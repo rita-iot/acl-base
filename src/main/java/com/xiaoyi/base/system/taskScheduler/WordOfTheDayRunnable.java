@@ -88,7 +88,7 @@ public class WordOfTheDayRunnable implements Runnable {
             aclEmo.setContent(content);
             aclEmo.setImgUrl(picture2);
             aclEmoService.save(aclEmo);
-            redisService.set("aclEmoSave", 86400);
+            redisService.set("aclEmoSave", 86000);
         }
     }
 }
