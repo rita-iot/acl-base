@@ -48,8 +48,8 @@ spring:
       remove-abandoned-timeout: 180
   redis:
     host: 101.35.146.86
-    port: 8082
-    password: 4redis@Invariable
+    port: 6999
+    password: 4amgucun@123
     database: 1
     timeout: 500000
     lettuce:

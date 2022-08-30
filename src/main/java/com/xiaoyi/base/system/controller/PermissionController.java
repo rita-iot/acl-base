@@ -23,6 +23,35 @@ public class PermissionController {
     @Autowired
     private PermissionService permissionService;
 
+    @GetMapping("getById/{id}")
+    @ApiOperation("根据id查询")
+    public Result getById(@PathVariable Integer id) {
+        Permission permission = permissionService.getById(id);
+        return Result.ok(permission);
+    }
+
+    @PostMapping("add")
+    @ApiOperation("新增")
+    public Result add(@RequestBody Permission permission) {
+        permissionService.save(permission);
+        return Result.ok();
+    }
+
+    @PutMapping("updateById")
+    @ApiOperation("修改")
+    public Result updateById(@RequestBody Permission permission) {
+        if (permission.getId() == null) return Result.fail("id不能为空");
+        permissionService.updateById(permission);
+        return Result.ok();
+    }
+
+    @ApiOperation("删除")
+    @DeleteMapping("del/{id}")
+    public Result del(@PathVariable String  id) {
+        permissionService.removeById(id);
+        return Result.ok();
+    }
+
     @ApiOperation(value = "查询所有菜单")
     @GetMapping
     public Result indexAllPermission() {
