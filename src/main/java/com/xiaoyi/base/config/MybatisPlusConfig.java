@@ -2,7 +2,6 @@ package com.xiaoyi.base.config;
 
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
-import com.baomidou.mybatisplus.extension.plugins.inner.BlockAttackInnerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.OptimisticLockerInnerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
 import org.springframework.context.annotation.Bean;
@@ -21,7 +20,7 @@ public class MybatisPlusConfig {
         //乐观锁引入
         interceptor.addInnerInterceptor(new OptimisticLockerInnerInterceptor());
         //防止全表更新或者删除
-        interceptor.addInnerInterceptor(new BlockAttackInnerInterceptor());
+        //interceptor.addInnerInterceptor(new BlockAttackInnerInterceptor());
         return interceptor;
     }
 }
