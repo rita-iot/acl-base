@@ -43,7 +43,7 @@ public class WxUserServiceImpl extends ServiceImpl<WxUserMapper, WxUser> impleme
 
     @Override
     public void syncUserList() {
-        this.remove(new QueryWrapper<>());
+        wxUserMapper.removeAllUser();
         WxMpUserList wxMpUserList = null;
         try {
             wxMpUserList = wxMpService.getUserService().userList(null);

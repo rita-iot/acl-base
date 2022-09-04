@@ -12,4 +12,8 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface WxUserMapper extends BaseMapper<WxUser> {
+    /**
+     * 删除全部用户
+     */
+    void removeAllUser();
 }
