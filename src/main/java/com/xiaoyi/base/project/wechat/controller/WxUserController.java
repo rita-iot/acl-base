@@ -66,7 +66,7 @@ public class WxUserController {
 
     @ApiOperation("删除")
     @DeleteMapping("del/{id}")
-    public Result del(@PathVariable Integer id) {
+    public Result del(@PathVariable String id) {
         wxUserService.removeById(id);
         return Result.ok();
     }

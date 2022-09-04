@@ -25,7 +25,7 @@ public class PermissionController {
 
     @GetMapping("getById/{id}")
     @ApiOperation("根据id查询")
-    public Result getById(@PathVariable Integer id) {
+    public Result getById(@PathVariable String id) {
         Permission permission = permissionService.getById(id);
         return Result.ok(permission);
     }
@@ -47,7 +47,7 @@ public class PermissionController {
 
     @ApiOperation("删除")
     @DeleteMapping("del/{id}")
-    public Result del(@PathVariable String  id) {
+    public Result del(@PathVariable String id) {
         permissionService.removeById(id);
         return Result.ok();
     }
