@@ -35,6 +35,6 @@
                              `status`
     </sql>
     <delete id="removeAllUser">
-        truncate wx_user
+        delete wx_user
     </delete>
 </mapper>
