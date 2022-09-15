@@ -17,8 +17,7 @@
     <name>acl-base</name>
     <description>Spring Boot - 前后端分离基础架构系统</description>
     <properties>
-        <java.version>1.8</java.version>
-        <!--<java.version>11</java.version>-->
+        <java.version>11</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
