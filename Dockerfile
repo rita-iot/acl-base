@@ -1,5 +1,5 @@
 #指定JDK版本
-FROM registry.cn-hangzhou.aliyuncs.com/jubo/openjdk:11
+FROM registry.cn-hangzhou.aliyuncs.com/jubo/openjdk:8
 ENV HOME /home/server
 RUN mkdir $HOME
 #设置控制台字符集编码

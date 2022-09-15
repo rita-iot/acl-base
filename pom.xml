@@ -17,9 +17,10 @@
     <name>acl-base</name>
     <description>Spring Boot - 前后端分离基础架构系统</description>
     <properties>
-        <java.version>11</java.version>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
+        <java.version>1.8</java.version>
+        <!--<java.version>11</java.version>-->
+        <!--<maven.compiler.source>11</maven.compiler.source>-->
+        <!--<maven.compiler.target>11</maven.compiler.target>-->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
@@ -160,19 +161,19 @@
                     </excludes>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.1</version>
-                <configuration>
-                    <source>11</source>
-                    <target>11</target>
-                    <testExcludes>
-                        <testExclude>/src/test/**</testExclude>
-                    </testExcludes>
-                    <encoding>utf-8</encoding>
-                </configuration>
-            </plugin>
+            <!--<plugin>-->
+            <!--    <groupId>org.apache.maven.plugins</groupId>-->
+            <!--    <artifactId>maven-compiler-plugin</artifactId>-->
+            <!--    <version>3.1</version>-->
+            <!--    <configuration>-->
+            <!--        <source>11</source>-->
+            <!--        <target>11</target>-->
+            <!--        <testExcludes>-->
+            <!--            <testExclude>/src/test/**</testExclude>-->
+            <!--        </testExcludes>-->
+            <!--        <encoding>utf-8</encoding>-->
+            <!--    </configuration>-->
+            <!--</plugin>-->
         </plugins>
     </build>
     <!-- 自定义仓库 -->
