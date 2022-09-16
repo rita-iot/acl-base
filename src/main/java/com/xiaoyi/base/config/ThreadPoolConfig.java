@@ -34,7 +34,7 @@ public class ThreadPoolConfig {
         executor.setQueueCapacity(queueCapacity);
         executor.setKeepAliveSeconds(keepAliveSeconds);
         // 设置线程名 前缀
-        executor.setThreadNamePrefix("asynexec-pool-");
+        executor.setThreadNamePrefix("asyn-pool-");
         // 线程池对拒绝任务(无线程可用)的处理策略
         executor.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
         return executor;

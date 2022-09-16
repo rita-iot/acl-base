@@ -13,11 +13,11 @@ import java.io.IOException;
 /**
  * 未授权统一返回处理类
  */
-public class UnauthEntryPoint implements AuthenticationEntryPoint {
+public class UnauthEntryPoint extends Throwable implements AuthenticationEntryPoint {
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response,
                          AuthenticationException e) throws IOException, ServletException {
         //  直接返回信息
-        ResponseUtil.out(response, Result.fail(50014,"当前用户登录信息已过期，请重新登录"));
+        ResponseUtil.out(response, Result.fail(50014,"The current user token has expired, please log in again"));
     }
 }

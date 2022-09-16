@@ -1,5 +1,6 @@
-package com.xiaoyi.base.system.entity;
+package com.xiaoyi.base.config.security.security;
 
+import com.xiaoyi.base.system.entity.User;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -14,22 +15,22 @@ import java.util.List;
  * 认证授权用户类
  */
 @Data
-public class SecurityUser implements UserDetails {
+public class LoginUser implements UserDetails {
 
     //当前登录用户
-    private transient User currentUserInfo;
+    private transient User currentUser;
 
     //当前权限 列表
     private List<String> permissionValueList;
 
     //无参构造
-    public SecurityUser() {
+    public LoginUser() {
     }
 
     //有参构造
-    public SecurityUser(User user) {
+    public LoginUser(User user) {
         if (user != null) {
-            this.currentUserInfo = user;
+            this.currentUser = user;
         }
     }
 
@@ -47,12 +48,12 @@ public class SecurityUser implements UserDetails {
 
     @Override
     public String getPassword() {
-        return currentUserInfo.getPassword();
+        return currentUser.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return currentUserInfo.getUsername();
+        return currentUser.getUsername();
     }
 
     @Override

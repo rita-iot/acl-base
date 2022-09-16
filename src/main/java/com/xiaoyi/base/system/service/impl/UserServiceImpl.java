@@ -29,7 +29,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     @Override
     public IPage<User> findPage(User user) {
         IPage<User> iPage = new Page<>(user.getCurrentPage(), user.getPageSize());
-        return this.page(iPage, new QueryWrapper<User>().orderByDesc("gmt_create"));
+        return this.page(iPage, new QueryWrapper<User>().orderByDesc("create_time"));
     }
 
     @Override

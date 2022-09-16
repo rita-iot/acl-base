@@ -5,12 +5,11 @@ import com.xiaoyi.base.system.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
- * 用户表 Mapper 接口
- * @author testjava
- * @since 2020-01-12
+ * @description: --
+ * @author：Bing
+ * @date：2022/9/16 13:32
+ * @version：1.0
  */
 @Mapper
-
 public interface UserMapper extends BaseMapper<User> {
-
 }

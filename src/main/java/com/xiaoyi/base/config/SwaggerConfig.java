@@ -39,7 +39,7 @@ public class SwaggerConfig {
                 .groupName("2.X版本")
                 .select()
                 //这里指定Controller扫描包路径
-                .apis(RequestHandlerSelectors.basePackage("com.base.example"))
+                .apis(RequestHandlerSelectors.basePackage("com.xiaoyi.base"))
                 .paths(PathSelectors.any())
                 .build();
     }

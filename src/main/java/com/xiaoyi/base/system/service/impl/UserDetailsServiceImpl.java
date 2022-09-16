@@ -1,7 +1,7 @@
 package com.xiaoyi.base.system.service.impl;
 
 import com.xiaoyi.base.system.entity.AclLog;
-import com.xiaoyi.base.system.entity.SecurityUser;
+import com.xiaoyi.base.config.security.security.LoginUser;
 import com.xiaoyi.base.system.entity.User;
 import com.xiaoyi.base.system.service.AclLogService;
 import com.xiaoyi.base.system.service.PermissionService;
@@ -32,7 +32,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         //根据用户名查询数据
         User user = userService.selectByUsername(username);
         //判断
-        if(user == null) {
+        if (user == null) {
             throw new UsernameNotFoundException("用户不存在");
         }
         AclLog aclLog = new AclLog();
@@ -43,13 +43,14 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         aclLog.setRemoteIp("127.0.0.1");
         User curUser = new User();
         //复制对象
-        BeanUtils.copyProperties(user,curUser);
+        BeanUtils.copyProperties(user, curUser);
+        curUser.setPassword(user.getPassword());
         aclLogService.addLog(aclLog);
         //根据用户查询用户权限列表
         List<String> permissionValueList = permissionService.selectPermissionValueByUserId(user.getId());
-        SecurityUser securityUser = new SecurityUser();
-        securityUser.setCurrentUserInfo(curUser);
-        securityUser.setPermissionValueList(permissionValueList);
-        return securityUser;
+        LoginUser loginUser = new LoginUser();
+        loginUser.setCurrentUser(curUser);
+        loginUser.setPermissionValueList(permissionValueList);
+        return loginUser;
     }
 }

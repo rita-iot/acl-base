@@ -47,7 +47,7 @@ public class ResultPage {
     public static ResultPage ok(IPage iPage) {
         ResultPage resultPage = new ResultPage();
         resultPage.setSuccess(true);
-        resultPage.setCode(20000);
+        resultPage.setCode(200);
         resultPage.setMessage("成功");
         Page page = new Page();
         page.setCurrentPage(Math.toIntExact(iPage.getCurrent()));

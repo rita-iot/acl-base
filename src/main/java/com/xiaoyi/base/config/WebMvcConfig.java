@@ -14,7 +14,6 @@ import org.springframework.web.filter.CorsFilter;
  */
 @Configuration
 public class WebMvcConfig {
-
     private CorsConfiguration corsConfig() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
         corsConfiguration.addAllowedOrigin("*");
@@ -26,7 +25,6 @@ public class WebMvcConfig {
         corsConfiguration.setMaxAge(3600L);
         return corsConfiguration;
     }
-
     @Bean
     public CorsFilter corsFilter() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();

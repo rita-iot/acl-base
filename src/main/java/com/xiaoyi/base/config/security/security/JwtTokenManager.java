@@ -16,13 +16,13 @@ import java.util.function.Function;
  * token操作工具类
  */
 @Component
-public class TokenManager {
-    private static final Logger logger = LoggerFactory.getLogger(TokenManager.class);
+public class JwtTokenManager {
+    private static final Logger logger = LoggerFactory.getLogger(JwtTokenManager.class);
     /**
      * token有效时长 单位 毫秒
      * token 过期时间, 单位: 秒. 这个值表示 7 天
      */
-    private long tokenEcpiration = 24 * 60 * 60 * 1000;
+    private long tokenEcpiration = 4 * 60 * 60 * 1000;
     /**
      * 编码秘钥 太简单 后期要更改
      */

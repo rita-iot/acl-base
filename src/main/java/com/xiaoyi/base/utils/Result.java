@@ -38,7 +38,7 @@ public class Result<T> {
     public static Result ok() {
         Result result = new Result();
         result.setSuccess(true);
-        result.setCode(20000);
+        result.setCode(200);
         result.setMessage("成功");
         return result;
     }
@@ -51,7 +51,7 @@ public class Result<T> {
     public static Result ok(String msg) {
         Result result = new Result();
         result.setSuccess(true);
-        result.setCode(20000);
+        result.setCode(200);
         result.setMessage(msg);
         return result;
     }
@@ -65,7 +65,7 @@ public class Result<T> {
     public static <T> Result<T> ok(T t) {
         Result result = new Result();
         result.setSuccess(true);
-        result.setCode(20000);
+        result.setCode(200);
         result.setMessage("成功");
         result.setData(t);
         return result;

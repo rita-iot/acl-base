@@ -1,7 +1,7 @@
 package com.xiaoyi.base.system.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.xiaoyi.base.config.security.security.TokenManager;
+import com.xiaoyi.base.config.security.security.JwtTokenManager;
 import com.xiaoyi.base.exception.GuliException;
 import com.xiaoyi.base.system.service.IndexService;
 import com.xiaoyi.base.utils.R;
@@ -28,7 +28,7 @@ public class IndexController {
 
     @Autowired
     private IndexService indexService;
-    private TokenManager tokenManager;
+    private JwtTokenManager jwtTokenManager;
 
     /**
      * 获取登录用户信息
