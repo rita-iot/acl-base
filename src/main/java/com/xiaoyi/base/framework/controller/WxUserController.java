@@ -1,11 +1,11 @@
-package com.xiaoyi.base.project.wechat.controller;
+package com.xiaoyi.base.framework.controller;
 
 import cn.hutool.core.date.DateUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.xiaoyi.base.utils.Result;
 import com.xiaoyi.base.utils.ResultPage;
-import com.xiaoyi.base.project.wechat.entity.WxUser;
-import com.xiaoyi.base.project.wechat.service.WxUserService;
+import com.xiaoyi.base.framework.entity.WxUser;
+import com.xiaoyi.base.framework.service.WxUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

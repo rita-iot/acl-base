@@ -1,9 +1,9 @@
-package com.xiaoyi.base.project.wechat;
+package com.xiaoyi.base.framework.wechat;
 
 import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.xiaoyi.base.project.wechat.entity.WxUser;
-import com.xiaoyi.base.project.wechat.service.WxUserService;
+import com.xiaoyi.base.framework.entity.WxUser;
+import com.xiaoyi.base.framework.service.WxUserService;
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.bean.WxMpUserQuery;

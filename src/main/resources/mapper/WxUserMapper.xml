@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.xiaoyi.base.project.wechat.mapper.WxUserMapper">
-    <resultMap id="BaseResultMap" type="com.xiaoyi.base.project.wechat.entity.WxUser">
+<mapper namespace="com.xiaoyi.base.framework.mapper.WxUserMapper">
+    <resultMap id="BaseResultMap" type="com.xiaoyi.base.framework.entity.WxUser">
         <!--@mbg.generated--><!--@Table wx_user-->
         <id column="open_id" jdbcType="VARCHAR" property="openId"/>
         <result column="nickname" jdbcType="VARCHAR" property="nickname"/>

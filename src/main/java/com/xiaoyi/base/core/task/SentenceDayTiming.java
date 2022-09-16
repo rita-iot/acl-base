@@ -6,9 +6,9 @@ import cn.hutool.core.date.DateUtil;
 import cn.hutool.http.HttpUtil;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
-import com.xiaoyi.base.project.qywx.Articles;
-import com.xiaoyi.base.project.qywx.News;
-import com.xiaoyi.base.project.qywx.QywxMessageVo;
+import com.xiaoyi.base.framework.qywx.Articles;
+import com.xiaoyi.base.framework.qywx.News;
+import com.xiaoyi.base.framework.qywx.QywxMessageVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 

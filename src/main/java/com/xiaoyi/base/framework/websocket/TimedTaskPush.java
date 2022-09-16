@@ -1,4 +1,4 @@
-package com.xiaoyi.base.project.websocket;
+package com.xiaoyi.base.framework.websocket;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.json.JSONObject;

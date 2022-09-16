@@ -1,4 +1,4 @@
-package com.xiaoyi.base.project.wechat.entity;
+package com.xiaoyi.base.framework.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;

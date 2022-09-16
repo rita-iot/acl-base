@@ -1,7 +1,7 @@
-package com.xiaoyi.base.project.wechat.mapper;
+package com.xiaoyi.base.framework.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.xiaoyi.base.project.wechat.entity.WxUser;
+import com.xiaoyi.base.framework.entity.WxUser;
 import org.apache.ibatis.annotations.Mapper;
 
 /**

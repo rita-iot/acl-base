@@ -1,4 +1,4 @@
-package com.xiaoyi.base.project.qywx;
+package com.xiaoyi.base.framework.qywx;
 
 import cn.hutool.http.HttpUtil;
 import cn.hutool.json.JSONObject;

@@ -1,4 +1,4 @@
-package com.xiaoyi.base.project.moning;
+package com.xiaoyi.base.framework.moning;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;

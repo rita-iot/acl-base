@@ -1,4 +1,4 @@
-package com.xiaoyi.base.project.moning;
+package com.xiaoyi.base.framework.moning;
 
 import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.api.impl.WxMpServiceImpl;

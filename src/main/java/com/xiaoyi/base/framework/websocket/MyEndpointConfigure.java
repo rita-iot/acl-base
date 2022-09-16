@@ -1,4 +1,4 @@
-package com.xiaoyi.base.project.websocket;
+package com.xiaoyi.base.framework.websocket;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;

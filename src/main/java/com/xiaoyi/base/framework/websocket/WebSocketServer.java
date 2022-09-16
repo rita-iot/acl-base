@@ -1,4 +1,4 @@
-package com.xiaoyi.base.project.websocket;
+package com.xiaoyi.base.framework.websocket;
 
 import cn.hutool.json.JSONArray;
 import cn.hutool.json.JSONObject;

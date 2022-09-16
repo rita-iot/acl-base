@@ -1,8 +1,8 @@
-package com.xiaoyi.base.project.wechat.service;
+package com.xiaoyi.base.framework.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.xiaoyi.base.project.wechat.entity.WxUser;
+import com.xiaoyi.base.framework.entity.WxUser;
 
 /**
  * @description: --
