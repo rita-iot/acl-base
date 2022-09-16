@@ -8,6 +8,7 @@ import com.xiaoyi.base.utils.ResultPage;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
@@ -30,6 +31,7 @@ public class AclEmoController {
 
     @GetMapping("list")
     @ApiOperation("查询所有")
+    @PreAuthorize("hasAuthority('user.list')")
     public Result list() {
         List<AclEmo> list = aclEmoService.findAll();
         return Result.ok(list);

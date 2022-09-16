@@ -1,7 +1,8 @@
 package com.xiaoyi.base.exception;
 
-import com.xiaoyi.base.utils.R;
+import com.xiaoyi.base.utils.Result;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -20,9 +21,22 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(Exception.class)
     @ResponseBody //为了返回数据
-    public R error(Exception e) {
+    public Result error(Exception e) {
         e.printStackTrace();
-        return R.error().message("执行了全局异常处理..");
+        return Result.fail("执行了全局异常处理..");
+    }
+
+    /**
+     * 无权限异常捕捉
+     * @param e
+     * @return
+     */
+    @ExceptionHandler(AccessDeniedException.class)
+    @ResponseBody //为了返回数据
+    public Result error(AccessDeniedException e) {
+        log.error("not have permission");
+        //e.printStackTrace();
+        return Result.fail(401,"The current user does not have permission");
     }
 
     /**
@@ -32,9 +46,9 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(ArithmeticException.class)
     @ResponseBody //为了返回数据
-    public R error(ArithmeticException e) {
+    public Result error(ArithmeticException e) {
         e.printStackTrace();
-        return R.error().message("执行了ArithmeticException异常处理..");
+        return Result.fail("执行了ArithmeticException异常处理..");
     }
 
     /**
@@ -43,11 +57,11 @@ public class GlobalExceptionHandler {
      * @return
      */
     @ExceptionHandler(GuliException.class)
-    @ResponseBody //为了返回数据
-    public R error(GuliException e) {
+    @ResponseBody
+    public Result error(GuliException e) {
         log.error(e.getMessage());
         e.printStackTrace();
-        return R.error().code(e.getCode()).message(e.getMsg());
+        return Result.fail(e.getCode(), e.getMsg());
     }
 
 }

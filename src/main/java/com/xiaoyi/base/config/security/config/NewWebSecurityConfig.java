@@ -65,7 +65,7 @@ public class NewWebSecurityConfig {
                         auth.antMatchers("/swagger-resources/**", "/v2/api-docs/**"
                                         , "/webjars/**", "/doc.html/**", "/admin/user/getVerificationCode",
                                         "/admin/user/getEasyCaptcha", "/websocket/**"
-                                        , "/push/message/**", "/user/login").permitAll()
+                                        , "/push/message/**", "/user/login", "/user/logout").permitAll()
                                 .anyRequest().authenticated()
                 )
                 .httpBasic();

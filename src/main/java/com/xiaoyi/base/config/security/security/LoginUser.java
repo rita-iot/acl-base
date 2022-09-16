@@ -16,9 +16,10 @@ import java.util.List;
  */
 @Data
 public class LoginUser implements UserDetails {
+    private static final long serialVersionUID = 1L;
 
     //当前登录用户
-    private transient User currentUser;
+    private User currentUser;
 
     //当前权限 列表
     private List<String> permissionValueList;
@@ -44,6 +45,14 @@ public class LoginUser implements UserDetails {
         }
 
         return authorities;
+    }
+
+    public User getCurrentUser() {
+        return currentUser;
+    }
+
+    public void setCurrentUser(User currentUser) {
+        this.currentUser = currentUser;
     }
 
     @Override

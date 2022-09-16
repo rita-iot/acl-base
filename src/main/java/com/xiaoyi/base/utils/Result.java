@@ -90,7 +90,7 @@ public class Result<T> {
     public static Result fail() {
         Result result = new Result();
         result.setSuccess(false);
-        result.setCode(401);
+        result.setCode(400);
         result.setMessage("失败");
         return result;
     }
