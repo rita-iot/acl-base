@@ -1,6 +1,7 @@
 package com.xiaoyi.base.config.security.config;
 
 import com.xiaoyi.base.config.security.filter.JwtAuthenticationTokenFilter;
+import com.xiaoyi.base.config.security.security.AccessDeniedHandlerImpl;
 import com.xiaoyi.base.config.security.security.JwtTokenManager;
 import com.xiaoyi.base.config.security.security.UnauthEntryPoint;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +43,10 @@ public class NewWebSecurityConfig {
     JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter;
     @Autowired
     private AuthenticationConfiguration authenticationConfiguration;
-
+    @Autowired
+    private AccessDeniedHandlerImpl accessDeniedHandler;
+    @Autowired
+    private UnauthEntryPoint unauthEntryPoint;
     @Bean
     public AuthenticationManager authenticationManager() throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
@@ -60,7 +64,7 @@ public class NewWebSecurityConfig {
         http.csrf().disable()//关闭csrf
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)//关闭session
                 .and()
-                .exceptionHandling().authenticationEntryPoint(new UnauthEntryPoint()).and()
+                //.exceptionHandling().authenticationEntryPoint(new UnauthEntryPoint()).and()
                 .authorizeRequests(auth ->
                         auth.antMatchers("/swagger-resources/**", "/v2/api-docs/**"
                                         , "/webjars/**", "/doc.html/**", "/admin/user/getVerificationCode",
@@ -69,7 +73,13 @@ public class NewWebSecurityConfig {
                                 .anyRequest().authenticated()
                 )
                 .httpBasic();
+        //把jwt 过滤器 放在user过滤器之前
         http.addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
+        //告诉security如何处理异常
+        http.exceptionHandling().authenticationEntryPoint(unauthEntryPoint)
+                .accessDeniedHandler(accessDeniedHandler);
+        //允许跨域
+        http.cors();
         return http.build();
     }
 
