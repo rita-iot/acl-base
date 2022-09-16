@@ -1,4 +1,4 @@
-package com.xiaoyi.base.config.security.security;
+package com.xiaoyi.base.config;
 
 import com.xiaoyi.base.system.entity.User;
 import lombok.Data;

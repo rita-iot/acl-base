@@ -3,7 +3,7 @@ package com.xiaoyi.base.system.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.xiaoyi.base.system.entity.YmRegion;
 import com.xiaoyi.base.system.service.YmRegionService;
-import com.xiaoyi.base.utils.R;
+import com.xiaoyi.base.utils.Result;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,14 +29,14 @@ public class YmRegionController {
 
     @ApiOperation("地区列表")
     @PostMapping("/list")
-    public R list() {
+    public Result list() {
         List<YmRegion> list = regionService.list(new QueryWrapper<>());
-        return R.ok().data("regionList", list);
+        return Result.ok(list);
     }
 
     @ApiOperation("新增地区")
     @PostMapping("/add")
-    public R add(@RequestBody YmRegion ymRegion){
-        return R.ok();
+    public Result add(@RequestBody YmRegion ymRegion) {
+        return Result.ok();
     }
 }

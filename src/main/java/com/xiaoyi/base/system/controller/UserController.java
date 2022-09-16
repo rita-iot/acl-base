@@ -4,13 +4,12 @@ package com.xiaoyi.base.system.controller;
 import cn.hutool.captcha.CaptchaUtil;
 import cn.hutool.captcha.ShearCaptcha;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.wf.captcha.ArithmeticCaptcha;
 import com.xiaoyi.base.system.entity.User;
 import com.xiaoyi.base.system.service.RoleService;
 import com.xiaoyi.base.system.service.UserService;
-import com.xiaoyi.base.utils.R;
 import com.xiaoyi.base.utils.Result;
 import com.xiaoyi.base.utils.ResultPage;
-import com.wf.captcha.ArithmeticCaptcha;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
@@ -74,16 +73,16 @@ public class UserController {
 
     @ApiOperation(value = "根据用户获取角色数据")
     @GetMapping("/toAssign/{userId}")
-    public R toAssign(@PathVariable String userId) {
+    public Result toAssign(@PathVariable String userId) {
         Map<String, Object> roleMap = roleService.findRoleByUserId(userId);
-        return R.ok().data(roleMap);
+        return Result.ok(roleMap);
     }
 
     @ApiOperation(value = "根据用户分配角色")
     @PostMapping("/doAssign")
-    public R doAssign(@RequestParam String userId, @RequestParam String[] roleId) {
+    public Result doAssign(@RequestParam String userId, @RequestParam String[] roleId) {
         roleService.saveUserRoleRealtionShip(userId, roleId);
-        return R.ok();
+        return Result.ok();
     }
     @ApiOperation(value = "根据id查询")
     @GetMapping("getById/{id}")

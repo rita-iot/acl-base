@@ -1,10 +1,8 @@
 package com.xiaoyi.base.system.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.xiaoyi.base.config.security.security.JwtTokenManager;
-import com.xiaoyi.base.exception.GuliException;
+import com.xiaoyi.base.config.JwtTokenManager;
 import com.xiaoyi.base.system.service.IndexService;
-import com.xiaoyi.base.utils.R;
 import com.xiaoyi.base.utils.Result;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -48,38 +46,31 @@ public class IndexController {
      */
     @GetMapping("menu")
     @ApiOperation("获取菜单")
-    public R getMenu() {
+    public Result getMenu() {
         //获取当前登录用户用户名
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         List<JSONObject> permissionList = indexService.getMenu(username);
-        return R.ok().data("permissionList", permissionList);
+        return Result.ok(permissionList);
     }
 
-    /**
-     * 注销登录
-     * @return
-     */
     @ApiOperation("注销登录")
     @PostMapping("logout")
-    public R logout() {
+    public Result logout() {
         System.out.println("logout执行了。。。");
-        return R.ok();
+        return Result.ok();
     }
 
-    /**
-     * 当前接口不需要认证
-     * @return
-     */
     @ApiOperation("无需认证接口")
     @GetMapping("unAuth")
-    public R unAuth() {
+    public Result unAuth() {
         System.out.println("unAuth。。。");
-        return R.ok().message("当前接口没有认证，不需要token");
+        return Result.ok("当前接口没有认证，不需要token");
     }
 
     @ApiOperation("异常测试")
     @GetMapping("/exception")
-    public R exception() {
-        throw new GuliException(111111111, "自定义异常");
+    public Result exception() {
+        //throw new GuliException(111111111, "自定义异常");
+        return Result.ok();
     }
 }

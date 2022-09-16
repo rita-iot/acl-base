@@ -8,7 +8,6 @@ import com.xiaoyi.base.system.service.IndexService;
 import com.xiaoyi.base.system.service.PermissionService;
 import com.xiaoyi.base.system.service.RoleService;
 import com.xiaoyi.base.system.service.UserService;
-import com.xiaoyi.base.utils.ResultCodeEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
@@ -44,7 +43,7 @@ public class IndexServiceImpl implements IndexService {
         if (null == user) {
             // 自定义异常返回
             // enum使用案例
-            throw new GuliException(ResultCodeEnum.USER_NULL.getCode(), ResultCodeEnum.USER_NULL.getMessage());
+            throw new GuliException(300, "用户不能为空");
         }
         //根据用户id查询获取角色
         List<Role> roleList = roleService.selectRoleByUserId(user.getId());

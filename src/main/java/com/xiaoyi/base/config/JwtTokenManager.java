@@ -1,5 +1,6 @@
-package com.xiaoyi.base.config.security.security;
+package com.xiaoyi.base.config;
 
+import cn.hutool.jwt.signers.JWTSigner;
 import com.alibaba.fastjson.JSONObject;
 import com.xiaoyi.base.system.entity.User;
 import io.jsonwebtoken.*;

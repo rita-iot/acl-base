@@ -4,7 +4,7 @@ import cn.hutool.core.date.*;
 import cn.hutool.http.HttpUtil;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
-import com.xiaoyi.base.system.cpt.ApplicationContextGetBeanHelper;
+import com.xiaoyi.base.core.init.ApplicationContextGetBeanHelper;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.mp.api.WxMpService;

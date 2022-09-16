@@ -1,8 +1,8 @@
 package com.xiaoyi.base.system.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.xiaoyi.base.config.security.security.JwtTokenManager;
-import com.xiaoyi.base.config.security.security.LoginUser;
+import com.xiaoyi.base.config.JwtTokenManager;
+import com.xiaoyi.base.config.LoginUser;
 import com.xiaoyi.base.core.redis.RedisService;
 import com.xiaoyi.base.system.entity.User;
 import com.xiaoyi.base.utils.Result;

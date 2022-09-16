@@ -1,8 +1,6 @@
-package com.xiaoyi.base.config.security.filter;
+package com.xiaoyi.base.config;
 
 import com.alibaba.fastjson.JSONObject;
-import com.xiaoyi.base.config.security.security.JwtTokenManager;
-import com.xiaoyi.base.config.security.security.LoginUser;
 import com.xiaoyi.base.core.redis.RedisService;
 import com.xiaoyi.base.system.entity.User;
 import org.jetbrains.annotations.NotNull;

@@ -11,7 +11,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.xiaoyi.base.core.redis.RedisService;
 import com.xiaoyi.base.framework.entity.WxUser;
 import com.xiaoyi.base.framework.service.WxUserService;
-import com.xiaoyi.base.system.cpt.ApplicationContextGetBeanHelper;
+import com.xiaoyi.base.core.init.ApplicationContextGetBeanHelper;
 import com.xiaoyi.base.system.entity.AclEmo;
 import com.xiaoyi.base.system.service.AclEmoService;
 import lombok.SneakyThrows;

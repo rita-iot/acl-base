@@ -1,7 +1,7 @@
 package com.xiaoyi.base.system.service.impl;
 
 import com.xiaoyi.base.system.entity.AclLog;
-import com.xiaoyi.base.config.security.security.LoginUser;
+import com.xiaoyi.base.config.LoginUser;
 import com.xiaoyi.base.system.entity.User;
 import com.xiaoyi.base.system.service.AclLogService;
 import com.xiaoyi.base.system.service.PermissionService;

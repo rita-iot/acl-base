@@ -45,9 +45,9 @@ spring:
       acquire-retry-delay: 10000
       # 设置获取连接出错时是否马上返回错误，true为马上返回
       fail-fast: true
-      #      超时时间限制，是否回收
-      remove-abandoned: true
-      #       超时时间
+      # 超时时间限制，是否回收
+      remove-abandoned: false
+      # 超时时间
       remove-abandoned-timeout: 180
   redis:
     host: 127.0.0.1
@@ -67,6 +67,8 @@ spring:
     time-zone: GMT+8
 mybatis-plus:
   mapper-locations: mapper/*.xml
+  global-config:
+    banner: false
 #  configuration:
 #    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #打印日志
 wechat:

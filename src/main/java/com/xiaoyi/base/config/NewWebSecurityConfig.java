@@ -1,13 +1,8 @@
-package com.xiaoyi.base.config.security.config;
+package com.xiaoyi.base.config;
 
-import com.xiaoyi.base.config.security.filter.JwtAuthenticationTokenFilter;
-import com.xiaoyi.base.config.security.security.AccessDeniedHandlerImpl;
-import com.xiaoyi.base.config.security.security.JwtTokenManager;
-import com.xiaoyi.base.config.security.security.UnauthEntryPoint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -36,10 +31,6 @@ import java.util.Map;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class NewWebSecurityConfig {
     @Autowired
-    private JwtTokenManager jwtTokenManager;
-    @Autowired
-    private RedisTemplate redisTemplate;
-    @Autowired
     JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter;
     @Autowired
     private AuthenticationConfiguration authenticationConfiguration;
@@ -58,7 +49,6 @@ public class NewWebSecurityConfig {
     //    return new DefaultSecurityFilterChain(new AntPathRequestMatcher("/**"), filters);
     //}
 
-    //配置过滤
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf().disable()//关闭csrf
