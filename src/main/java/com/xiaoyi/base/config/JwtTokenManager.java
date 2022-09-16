@@ -1,6 +1,5 @@
 package com.xiaoyi.base.config;
 
-import cn.hutool.jwt.signers.JWTSigner;
 import com.alibaba.fastjson.JSONObject;
 import com.xiaoyi.base.system.entity.User;
 import io.jsonwebtoken.*;
@@ -20,14 +19,9 @@ import java.util.function.Function;
 public class JwtTokenManager {
     private static final Logger logger = LoggerFactory.getLogger(JwtTokenManager.class);
     /**
-     * token有效时长 单位 毫秒
-     * token 过期时间, 单位: 秒. 这个值表示 7 天
-     */
-    private long tokenEcpiration = 4 * 60 * 60 * 1000;
-    /**
      * 编码秘钥 太简单 后期要更改
      */
-    private String tokenSignKey = "acl-admin";
+    private final String tokenSignKey = "acl-admin";
 
     /**
      * 1 使用jwt根据用户名生成token
@@ -35,6 +29,11 @@ public class JwtTokenManager {
      * @return
      */
     public String createToken(String username) {
+        /**
+         * token有效时长 单位 毫秒
+         * token 过期时间, 单位: 秒. 这个值表示 7 天
+         */
+        long tokenEcpiration = 4 * 60 * 60 * 1000;
         String token = Jwts.builder().setSubject(username)//主体
                 .setExpiration(new Date(System.currentTimeMillis() + tokenEcpiration))//有效时长
                 .signWith(SignatureAlgorithm.HS512, tokenSignKey)//秘钥加密
@@ -49,9 +48,8 @@ public class JwtTokenManager {
      * @return
      */
     public String getUserInfoFromToken(String token) {
-        String userinfo = Jwts.parser().setSigningKey(tokenSignKey)
+        return Jwts.parser().setSigningKey(tokenSignKey)
                 .parseClaimsJws(token).getBody().getSubject();
-        return userinfo;
     }
 
     /**

@@ -2,7 +2,6 @@ package com.xiaoyi.base.config;
 
 import com.alibaba.fastjson.JSONObject;
 import com.xiaoyi.base.core.redis.RedisService;
-import com.xiaoyi.base.system.entity.User;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -46,11 +45,11 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
         String dataJson = (String) redisService.get("login:" + username);
         // 从string转对象
         LoginUser loginUser = JSONObject.parseObject(dataJson, LoginUser.class);
-        User currentUser = loginUser.getCurrentUser();
-        Collection<? extends GrantedAuthority> authorities = loginUser.getAuthorities();
         if (Objects.isNull(loginUser)) {
             throw new RuntimeException("当前用户未登录！");
         }
+        //User currentUser = loginUser.getCurrentUser();
+        Collection<? extends GrantedAuthority> authorities = loginUser.getAuthorities();
         UsernamePasswordAuthenticationToken authenticationToken
                 = new UsernamePasswordAuthenticationToken(loginUser, null, authorities);
         //5存入SecurityContextHolder

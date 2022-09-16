@@ -5,6 +5,7 @@ import com.xiaoyi.base.system.entity.AclTask;
 import com.xiaoyi.base.system.service.AclTaskService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.scheduling.support.CronTrigger;
 import org.springframework.stereotype.Component;
@@ -24,14 +25,12 @@ import java.util.concurrent.ScheduledFuture;
 public class CoreScheduler {
     @Autowired
     private AclTaskService aclTaskService;
-    //数据库的任务
-    //public static ConcurrentHashMap<String, AclTask> tasks = new ConcurrentHashMap<>(10);
-
+    @Autowired
+    private ThreadPoolTaskExecutor threadPoolTaskExecutor;
     //正在运行的任务
     public static ConcurrentHashMap<String, ScheduledFuture> runTasks = new ConcurrentHashMap<>(10);
-
     //线程池任务调度
-    private ThreadPoolTaskScheduler threadPoolTaskScheduler = new ThreadPoolTaskScheduler();
+    private final ThreadPoolTaskScheduler threadPoolTaskScheduler = new ThreadPoolTaskScheduler();
 
     /**
      * 初始化线程池任务调度
@@ -80,7 +79,7 @@ public class CoreScheduler {
         boolean b = CoreScheduler.runTasks.containsKey(taskId);
         if (b) {
             CoreScheduler.runTasks.get(taskId).cancel(true);
-            ScheduledFuture scheduledFuture = CoreScheduler.runTasks.get(taskId);
+            //ScheduledFuture scheduledFuture = CoreScheduler.runTasks.get(taskId);
             CoreScheduler.runTasks.remove(taskId);
         }
         this.updateTaskStatus(taskId, 2);
