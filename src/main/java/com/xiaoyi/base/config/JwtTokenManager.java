@@ -1,15 +1,17 @@
 package com.xiaoyi.base.config;
 
-import com.alibaba.fastjson.JSONObject;
-import com.xiaoyi.base.system.entity.User;
-import io.jsonwebtoken.*;
-import org.apache.commons.lang3.StringUtils;
+import cn.hutool.core.date.DateUtil;
+import cn.hutool.jwt.JWT;
+import cn.hutool.jwt.JWTUtil;
+import cn.hutool.jwt.signers.JWTSigner;
+import cn.hutool.jwt.signers.JWTSignerUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
-import java.util.function.Function;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Jwt工具类
@@ -24,88 +26,51 @@ public class JwtTokenManager {
     private final String tokenSignKey = "acl-admin";
 
     /**
-     * 1 使用jwt根据用户名生成token
+     * 使用jwt根据用户名生成token
      * @param username
      * @return
      */
     public String createToken(String username) {
         /**
          * token有效时长 单位 毫秒
-         * token 过期时间, 单位: 秒. 这个值表示 7 天
+         * token 过期时间, 单位: 秒. 这个值表示 4 小时
          */
         long tokenEcpiration = 4 * 60 * 60 * 1000;
-        String token = Jwts.builder().setSubject(username)//主体
-                .setExpiration(new Date(System.currentTimeMillis() + tokenEcpiration))//有效时长
-                .signWith(SignatureAlgorithm.HS512, tokenSignKey)//秘钥加密
-                .compressWith(CompressionCodecs.GZIP)
-                .compact();
-        return token;
+        Map<String, Object> map = new HashMap<>();
+        map.put("username", username);
+        map.put("expire_time", System.currentTimeMillis() + tokenEcpiration);
+        JWTSigner signer = JWTSignerUtil.hs512(tokenSignKey.getBytes());
+        return JWTUtil.createToken(map, signer);
     }
 
     /**
-     * 2 根据token字符串得到用户信息
+     * 获取用户信息
      * @param token
      * @return
      */
     public String getUserInfoFromToken(String token) {
-        return Jwts.parser().setSigningKey(tokenSignKey)
-                .parseClaimsJws(token).getBody().getSubject();
-    }
-
-    /**
-     * 删除token
-     * @param token
-     */
-    public void removeToken(String token) {
+        JWT jwt = JWTUtil.parseToken(token);
+        //Object header = jwt.getHeader(JWTHeader.TYPE);
+        return (String) jwt.getPayload("username");
     }
 
     /**
      * 获取过期时间
-     * @return
-     */
-    public Date getExpirationDateFromToken(String token) {
-        return getClaimFromToken(token, Claims::getExpiration);
-    }
-
-    /**
-     * 从token中获取
-     * @param token
-     * @param claimsResolver
-     * @param <T>
-     * @return
-     */
-    public <T> T getClaimFromToken(String token, Function<Claims, T> claimsResolver) {
-        Claims claims = getAllClaimsFromToken(token);
-        return claimsResolver.apply(claims);
-    }
-
-    private Claims getAllClaimsFromToken(String token) {
-        return Jwts.parser()
-                .setSigningKey(tokenSignKey)
-                .parseClaimsJws(token)
-                .getBody();
-    }
-
-    /**
-     * 验证token是否有效
      * @param token
      * @return
      */
-    public Boolean validateToken(String token) {
-        String userInfo;
-        try {
-            userInfo = getUserInfoFromToken(token);
-        } catch (ExpiredJwtException jwtException) {
-            logger.error("token过期:{}", jwtException.getMessage());
-            return false;
-        }
-        if (StringUtils.isBlank(userInfo)) {
-            return false;
-        }
-        User user = JSONObject.parseObject(userInfo, User.class);
-        if (user != null && StringUtils.isBlank(user.getUsername())) {
-            return false;
-        }
-        return true;
+    public Date getExpireTime(String token) {
+        JWT jwt = JWTUtil.parseToken(token);
+        Long expire_time = (Long) jwt.getPayload("expire_time");
+        return DateUtil.date(expire_time);
+    }
+
+    /**
+     * 验证token有效
+     * @param token
+     * @return
+     */
+    public Boolean isEffective(String token) {
+        return JWTUtil.verify(token, tokenSignKey.getBytes());
     }
 }

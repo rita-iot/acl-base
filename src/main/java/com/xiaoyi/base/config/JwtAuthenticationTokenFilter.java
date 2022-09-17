@@ -41,6 +41,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
             filterChain.doFilter(request, response);
             return;
         }
+        //Boolean effective = jwtTokenManager.isEffective(token);
         String username = jwtTokenManager.getUserInfoFromToken(token);
         String dataJson = (String) redisService.get("login:" + username);
         // 从string转对象
