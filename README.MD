@@ -24,27 +24,14 @@
 	</a>
 </p>
 
-### 2022-03-26
-
-- 移除swagger-bootstrap-ui组件，引入knife4j文档组件
-- 学习项目，建议有点基础的可以随意自定义相关实现
-- 新增EasyCaptcha验证码组件
-- 新增地区新增接口，验证swagger文档是否生成正确
-- 修复用户验证码或密码错误提示
-- 自定义异常逻辑学习
-- 注销登录接口更改，基本没啥大问题
-- 处理统一结果返回类
-
-------
-
 ### 项目技术栈
 
 - Java 1.8
 - Mybatis Plus 3.0.5
-- SpringBoot 2.3.4
+- SpringBoot 2.7.0
 - Mysql 5.7
-- Redis 3.0+
-- Swagger 2.7.0
+- Redis 5.7.0
+- Swagger 2.9.0
 - Jwt Token
 
 ------
@@ -65,7 +52,7 @@
 
 ### 登录接口：
 
-请求地址：http://localhost:8080/admin/login
+请求地址：http://localhost:8080/user/login
 
 提交方式：POST
 
@@ -78,29 +65,12 @@ produces ["*/*"]
 ```
 {
     "username":"admin",
-    "password": "123456",
-    "captcha":"6yxp7"
+    "password": "123456"
 }
 ```
-
-**User对象**
-
-| 参数名称    | 参数说明                                    | 请求类型 | 是否必须 | 数据类型          |
-| ----------- | ------------------------------------------- | -------- | -------- | ----------------- |
-| captcha     | 验证码                                      | body     | true    | string            |
-| gmtCreate   | 创建时间                                    | body     | false    | string(date-time) |
-| gmtModified | 更新时间                                    | body     | false    | string(date-time) |
-| id          | 会员id                                      | body     | false    | string            |
-| isDeleted   | 逻辑删除 1（true）已删除， 0（false）未删除 | body     | false    | boolean           |
-| nickName    | 昵称                                        | body     | false    | string            |
-| password    | 密码                                        | body     | true    | string            |
-| salt        | 用户头像                                    | body     | false    | string            |
-| token       | 用户签名                                    | body     | false    | string            |
-| username    | 微信openid                                  | body     | true    | string            |
-
 ### 注销登录
 
-请求地址：http://localhost:8080/admin/logout
+请求地址：http://localhost:8080/user/logout
 
 提交方式：GET
 
@@ -108,11 +78,11 @@ consumes ["application/json"]
 
 produces ["*/*"]
 
-请求头Header:  toke:获取到的token值
+请求头Header:  Authorization:获取到的Authorization值
 
 ### 获取当前用户信息：
 
-请求地址：http://localhost:8080/index/info
+请求地址：http://localhost:8080/user/info
 
 提交方式：GET
 
@@ -120,6 +90,6 @@ consumes `["application/json"]`
 
 produces `["*/*"]`
 
-请求头Header:  toke:获取到的token值
+请求头Header:  Authorization:获取到的Authorization值
 
 其余接口可以通过api文档查看。
