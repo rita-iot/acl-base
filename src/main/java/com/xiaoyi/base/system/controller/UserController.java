@@ -3,6 +3,7 @@ package com.xiaoyi.base.system.controller;
 
 import cn.hutool.captcha.CaptchaUtil;
 import cn.hutool.captcha.ShearCaptcha;
+import cn.hutool.core.util.IdUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.wf.captcha.ArithmeticCaptcha;
 import com.xiaoyi.base.system.entity.User;
@@ -59,6 +60,8 @@ public class UserController {
         BCryptPasswordEncoder bp = new BCryptPasswordEncoder();
         user.setPassword(bp.encode(user.getPassword()));
         // 这里要判断用户名是否重复
+        String s = IdUtil.fastSimpleUUID();
+        user.setId(s);
         userService.save(user);
         return Result.ok();
     }
