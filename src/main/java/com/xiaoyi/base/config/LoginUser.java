@@ -5,7 +5,6 @@ import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -39,7 +38,9 @@ public class LoginUser implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Collection<GrantedAuthority> authorities = new ArrayList<>();
         for (String permissionValue : permissionValueList) {
-            if (StringUtils.isEmpty(permissionValue)) continue;
+            if (permissionValue == null) {
+                continue;
+            }
             SimpleGrantedAuthority authority = new SimpleGrantedAuthority(permissionValue);
             authorities.add(authority);
         }

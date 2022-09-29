@@ -59,7 +59,9 @@ public class WxUserController {
     @PutMapping("updateById")
     @ApiOperation("修改")
     public Result updateById(@RequestBody WxUser wxUser) {
-        if (wxUser.getOpenId() == null) return Result.fail("id不能为空");
+        if (wxUser.getOpenId() == null) {
+            return Result.fail("id不能为空");
+        }
         wxUserService.updateById(wxUser);
         return Result.ok();
     }

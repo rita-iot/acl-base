@@ -60,7 +60,9 @@ public class DeptController {
     @PutMapping("updateById")
     @ApiOperation("修改")
     public Result updateById(@RequestBody AclDept aclDept) {
-        if (aclDept.getDeptId() == null) return Result.fail("id不能为空");
+        if (aclDept.getDeptId() == null) {
+            return Result.fail("id不能为空");
+        }
         aclDeptService.updateById(aclDept);
         return Result.ok();
     }

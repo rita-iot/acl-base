@@ -56,7 +56,9 @@ public class UserController {
     @PostMapping("save")
     public Result save(@RequestBody User user) {
         Boolean b = userService.findByUserName(user);
-        if (b) return Result.fail("当前登录名已存在，请使用其他登录名");
+        if (b) {
+            return Result.fail("当前登录名已存在，请使用其他登录名");
+        }
         BCryptPasswordEncoder bp = new BCryptPasswordEncoder();
         user.setPassword(bp.encode(user.getPassword()));
         // 这里要判断用户名是否重复
@@ -69,7 +71,9 @@ public class UserController {
     @ApiOperation("删除")
     @DeleteMapping("del/{id}")
     public Result del(@PathVariable String id) {
-        if (id.equals("1")) return Result.fail("超级管理员不能删除");
+        if ("1".equals(id)) {
+            return Result.fail("超级管理员不能删除");
+        }
         userService.removeById(id);
         return Result.ok();
     }
@@ -97,8 +101,12 @@ public class UserController {
     @ApiOperation(value = "修改")
     @PutMapping("updateById")
     public Result updateById(@RequestBody User user) {
-        if (user.getId() == null) return Result.fail("id不能为空");
-        if (user.getId().equals("1")) return Result.fail("超级管理员不能更新");
+        if (user.getId() == null) {
+            return Result.fail("id不能为空");
+        }
+        if ("1".equals(user.getId())) {
+            return Result.fail("超级管理员不能更新");
+        }
         userService.updateById(user);
         return Result.ok();
     }

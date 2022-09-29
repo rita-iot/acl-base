@@ -21,7 +21,7 @@ public class QywxMessageVo {
     private String msgtype = "news";
     private int agentid = 1000002;
     private News news;
-    private int enable_id_trans = 0;
-    private int enable_duplicate_check = 0;
-    private int duplicate_check_interval = 1800;
+    private int enableIdTrans = 0;
+    private int enableDuplicateCheck = 0;
+    private int duplicateCheckInterval = 1800;
 }

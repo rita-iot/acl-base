@@ -1,4 +1,4 @@
-package com.xiaoyi.base.system.taskScheduler;
+package com.xiaoyi.base.system.taskscheduler;
 
 import cn.hutool.core.date.*;
 import cn.hutool.http.HttpUtil;
@@ -84,8 +84,8 @@ public class PushMessageRunnable implements Runnable {
     }
 
     public static Map<String, Object> getWeather() {
-        String wea_url = "https://autodev.openspeech.cn/csp/api/v2.1/weather?openId=aiuicus&clientType=android&sign=android&city=%E6%B1%9D%E5%B7%9E&needMoreData=true&pageNo=1&pageSize=1";
-        String s = HttpUtil.get(wea_url);
+        String weaUrl = "https://autodev.openspeech.cn/csp/api/v2.1/weather?openId=aiuicus&clientType=android&sign=android&city=%E6%B1%9D%E5%B7%9E&needMoreData=true&pageNo=1&pageSize=1";
+        String s = HttpUtil.get(weaUrl);
         JSONObject jsonObject = JSONUtil.parseObj(s);
         Map data = jsonObject.get("data", Map.class);
         List<Map<String, Object>> list = (List<Map<String, Object>>) data.get("list");

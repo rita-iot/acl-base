@@ -57,7 +57,9 @@ public class AclLogController {
     @PostMapping("add")
     @ApiOperation("新增")
     public Result add(@RequestBody AclLog aclLog) {
-        if (aclLog.getId() == null) return Result.fail("id不能为空");
+        if (aclLog.getId() == null) {
+            return Result.fail("id不能为空");
+        }
         aclLog.setCreateTime(new Date());
         aclLogService.save(aclLog);
         return Result.ok();
@@ -65,7 +67,9 @@ public class AclLogController {
     @PostMapping("updateById")
     @ApiOperation("修改")
     public Result updateById(@RequestBody AclLog aclLog) {
-        if (aclLog.getId() == null) return Result.fail("emo语句不能为空");
+        if (aclLog.getId() == null) {
+            return Result.fail("emo语句不能为空");
+        }
         aclLogService.updateById(aclLog);
         return Result.ok();
     }

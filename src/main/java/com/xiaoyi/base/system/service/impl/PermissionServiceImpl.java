@@ -12,7 +12,6 @@ import com.xiaoyi.base.system.service.RolePermissionService;
 import com.xiaoyi.base.system.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -86,7 +85,9 @@ public class PermissionServiceImpl extends ServiceImpl<PermissionMapper, Permiss
 
         List<RolePermission> rolePermissionList = new ArrayList<>();
         for (String permissionId : permissionIds) {
-            if (StringUtils.isEmpty(permissionId)) continue;
+            if (permissionId == null) {
+                continue;
+            }
 
             RolePermission rolePermission = new RolePermission();
             rolePermission.setRoleId(roleId);

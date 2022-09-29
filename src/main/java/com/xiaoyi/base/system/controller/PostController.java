@@ -59,7 +59,9 @@ public class PostController {
     @PutMapping("updateById")
     @ApiOperation("修改")
     public Result updateById(@RequestBody Post post) {
-        if (post.getPostId() == null) return Result.fail("id不能为空");
+        if (post.getPostId() == null) {
+            return Result.fail("id不能为空");
+        }
         postService.updateById(post);
         return Result.ok();
     }

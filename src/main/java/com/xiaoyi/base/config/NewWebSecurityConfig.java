@@ -37,7 +37,7 @@ public class NewWebSecurityConfig {
     @Autowired
     private AccessDeniedHandlerImpl accessDeniedHandler;
     @Autowired
-    private UnauthEntryPoint unauthEntryPoint;
+    private UnauthEntryPointException unauthEntryPoint;
     @Bean
     public AuthenticationManager authenticationManager() throws Exception {
         return authenticationConfiguration.getAuthenticationManager();

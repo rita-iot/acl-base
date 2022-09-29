@@ -28,7 +28,7 @@ public class TimedTaskPush {
     @Scheduled(cron = "0/1 * * * * ? ")
     public void pushMessage() {
         String format = DateUtil.now();
-        Map<String, Session> sessionMap = WebSocketServer.sessionMap;
+        Map<String, Session> sessionMap = WebSocketServer.SESSION_MAP;
         if (sessionMap.size() != 0) {
             for (Map.Entry<String, Session> entry : sessionMap.entrySet()) {
                 //String key = entry.getKey();

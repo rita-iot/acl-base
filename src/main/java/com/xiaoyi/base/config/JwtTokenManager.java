@@ -61,8 +61,8 @@ public class JwtTokenManager {
      */
     public Date getExpireTime(String token) {
         JWT jwt = JWTUtil.parseToken(token);
-        Long expire_time = (Long) jwt.getPayload("expire_time");
-        return DateUtil.date(expire_time);
+        Long expireTime = (Long) jwt.getPayload("expire_time");
+        return DateUtil.date(expireTime);
     }
 
     /**

@@ -3,7 +3,7 @@ package com.xiaoyi.base.core.init;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.xiaoyi.base.system.entity.AclTask;
 import com.xiaoyi.base.system.service.AclTaskService;
-import com.xiaoyi.base.system.taskScheduler.CoreScheduler;
+import com.xiaoyi.base.system.taskscheduler.CoreScheduler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

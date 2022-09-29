@@ -30,20 +30,20 @@ public class WebSocketServer {
     /**
      * 记录当前在线连接数
      */
-    public static final Map<String, Session> sessionMap = new ConcurrentHashMap<>();
+    public static final Map<String, Session> SESSION_MAP = new ConcurrentHashMap<>();
 
     /**
      * 连接建立成功调用的方法
      */
     @OnOpen
     public void onOpen(Session session, @PathParam("username") String username) {
-        sessionMap.put(username, session);
-        log.info("onOpen有新用户加入，username={}, 当前在线人数为：{}", username, sessionMap.size());
+        SESSION_MAP.put(username, session);
+        log.info("onOpen有新用户加入，username={}, 当前在线人数为：{}", username, SESSION_MAP.size());
         JSONObject result = new JSONObject();
         JSONArray array = new JSONArray();
         result.set("users", array);
         // map的循环操作
-        for (Object key : sessionMap.keySet()) {
+        for (Object key : SESSION_MAP.keySet()) {
             JSONObject jsonObject = new JSONObject();
             jsonObject.set("username", key);
             // {"username", "zhang", "username": "admin"}
@@ -58,8 +58,8 @@ public class WebSocketServer {
      */
     @OnClose
     public void onClose(Session session, @PathParam("username") String username) {
-        sessionMap.remove(username);
-        log.info("onClose有一连接关闭，移除username={}的用户session, 当前在线人数为：{}", username, sessionMap.size());
+        SESSION_MAP.remove(username);
+        log.info("onClose有一连接关闭，移除username={}的用户session, 当前在线人数为：{}", username, SESSION_MAP.size());
     }
 
     /**
@@ -76,7 +76,7 @@ public class WebSocketServer {
         String toUsername = obj.getStr("to"); // to表示发送给哪个用户，比如 admin
         String text = obj.getStr("text"); // 发送的消息文本  hello
         // {"to": "admin", "text": "聊天文本"}
-        Session toSession = sessionMap.get(toUsername); // 根据 to用户名来获取 session，再通过session发送消息文本
+        Session toSession = SESSION_MAP.get(toUsername); // 根据 to用户名来获取 session，再通过session发送消息文本
         if (toSession != null) {
             // 服务器端 再把消息组装一下，组装后的消息包含发送人和发送的文本内容
             // {"from": "zhang", "text": "hello"}
@@ -113,7 +113,7 @@ public class WebSocketServer {
      */
     private void sendAllMessage(String message) {
         try {
-            for (Session session : sessionMap.values()) {
+            for (Session session : SESSION_MAP.values()) {
                 log.info("服务端给客户端[{}]发送消息{}", session.getId(), message);
                 session.getBasicRemote().sendText(message);
             }

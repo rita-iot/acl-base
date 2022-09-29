@@ -19,7 +19,8 @@ public class ResponseUtil {
     public static void out(HttpServletResponse response, Result result) {
         ObjectMapper mapper = new ObjectMapper();
         response.setStatus(HttpStatus.OK.value());
-        response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
+        //response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
+        response.setContentType(MediaType.APPLICATION_JSON_VALUE);
         try {
             mapper.writeValue(response.getWriter(), result);
         } catch (IOException e) {

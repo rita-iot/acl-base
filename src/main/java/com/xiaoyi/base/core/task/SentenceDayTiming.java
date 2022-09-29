@@ -82,8 +82,6 @@ public class SentenceDayTiming {
     public static String getAccessToken() {
         String s = HttpUtil.get(ACCESS_TOKEN_URL);
         Map map = JSONUtil.toBean(s, Map.class);
-        String access_token = (String) map.get("access_token");
-        //accessTokenMap.put("access_token", access_token);
-        return access_token;
+        return (String) map.get("access_token");
     }
 }

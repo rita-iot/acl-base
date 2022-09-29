@@ -44,7 +44,9 @@ public class RoleController {
     @ApiOperation(value = "修改")
     @PutMapping("updateById")
     public Result updateById(@RequestBody Role role) {
-        if (role.getId() == null) return Result.fail("id不能为空");
+        if (role.getId() == null) {
+            return Result.fail("id不能为空");
+        }
         roleService.updateById(role);
         return Result.ok();
     }

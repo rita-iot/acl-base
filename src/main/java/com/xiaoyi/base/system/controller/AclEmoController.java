@@ -54,7 +54,9 @@ public class AclEmoController {
     @PostMapping("add")
     @ApiOperation("新增")
     public Result add(@RequestBody AclEmo aclEmo) {
-        if (aclEmo.getText() == null) return Result.fail("emo语句不能为空");
+        if (aclEmo.getText() == null) {
+            return Result.fail("emo语句不能为空");
+        }
         aclEmo.setCreateTime(new Date());
         aclEmoService.save(aclEmo);
         return Result.ok();
@@ -63,7 +65,9 @@ public class AclEmoController {
     @PostMapping("updateById")
     @ApiOperation("修改")
     public Result updateById(@RequestBody AclEmo aclEmo) {
-        if (aclEmo.getId() == null) return Result.fail("emo语句不能为空");
+        if (aclEmo.getId() == null) {
+            return Result.fail("emo语句不能为空");
+        }
         aclEmoService.updateById(aclEmo);
         return Result.ok();
     }

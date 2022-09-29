@@ -11,7 +11,6 @@ import com.xiaoyi.base.system.service.RoleService;
 import com.xiaoyi.base.system.service.UserRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -67,7 +66,9 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
 
         List<UserRole> userRoleList = new ArrayList<>();
         for (String roleId : roleIds) {
-            if (StringUtils.isEmpty(roleId)) continue;
+            if (roleId == null) {
+                continue;
+            }
             UserRole userRole = new UserRole();
             userRole.setUserId(userId);
             userRole.setRoleId(roleId);

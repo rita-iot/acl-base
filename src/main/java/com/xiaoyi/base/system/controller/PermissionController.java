@@ -40,7 +40,9 @@ public class PermissionController {
     @PutMapping("updateById")
     @ApiOperation("修改")
     public Result updateById(@RequestBody Permission permission) {
-        if (permission.getId() == null) return Result.fail("id不能为空");
+        if (permission.getId() == null) {
+            return Result.fail("id不能为空");
+        }
         permissionService.updateById(permission);
         return Result.ok();
     }

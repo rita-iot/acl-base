@@ -4,7 +4,7 @@ import cn.hutool.core.date.DateUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.xiaoyi.base.system.entity.AclTask;
 import com.xiaoyi.base.system.service.AclTaskService;
-import com.xiaoyi.base.system.taskScheduler.CoreScheduler;
+import com.xiaoyi.base.system.taskscheduler.CoreScheduler;
 import com.xiaoyi.base.utils.Result;
 import com.xiaoyi.base.utils.ResultPage;
 import io.swagger.annotations.Api;
@@ -64,7 +64,9 @@ public class AclTaskController {
     @PutMapping("updateById")
     @ApiOperation("修改")
     public Result updateById(@RequestBody AclTask aclTask) {
-        if (aclTask.getTaskId() == null) return Result.fail("id不能为空");
+        if (aclTask.getTaskId() == null) {
+            return Result.fail("id不能为空");
+        }
         String trim = aclTask.getTaskExp().trim();
         aclTask.setTaskExp(trim);
         aclTaskService.updateById(aclTask);
@@ -81,7 +83,9 @@ public class AclTaskController {
     @DeleteMapping("del/{id}")
     public Result del(@PathVariable Integer id) {
         AclTask aclTask = aclTaskService.getById(id);
-        if (aclTask.getTaskStatus() == 1) return Result.fail("请先停止任务");
+        if (aclTask.getTaskStatus() == 1) {
+            return Result.fail("请先停止任务");
+        }
         aclTaskService.removeById(id);
         return Result.ok();
     }
@@ -90,7 +94,9 @@ public class AclTaskController {
     @GetMapping("start/{taskId}")
     public Result start(@PathVariable("taskId") String taskId) {
         AclTask aclTask = aclTaskService.getById(taskId);
-        if (aclTask.getTaskStatus() == 1) return Result.fail("当前任务已启用");
+        if (aclTask.getTaskStatus() == 1) {
+            return Result.fail("当前任务已启用");
+        }
         coreScheduler.start(aclTask);
         return Result.ok();
 
@@ -100,7 +106,9 @@ public class AclTaskController {
     @GetMapping("stop/{taskId}")
     public Result stop(@PathVariable("taskId") String taskId) {
         AclTask aclTask = aclTaskService.getById(taskId);
-        if (aclTask.getTaskStatus() == 2) return Result.fail("当前任务未启用");
+        if (aclTask.getTaskStatus() == 2) {
+            return Result.fail("当前任务未启用");
+        }
         coreScheduler.stop(aclTask);
         return Result.ok();
     }

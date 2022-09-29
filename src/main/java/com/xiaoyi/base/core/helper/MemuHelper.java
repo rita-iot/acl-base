@@ -2,7 +2,6 @@ package com.xiaoyi.base.core.helper;
 
 import com.alibaba.fastjson.JSONObject;
 import com.xiaoyi.base.system.entity.Permission;
-import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,7 +54,9 @@ public class MemuHelper {
 
                     List<Permission> threeMeunList = two.getChildren();
                     for (Permission three : threeMeunList) {
-                        if (StringUtils.isEmpty(three.getPath())) continue;
+                        if (three.getPath() == null) {
+                            continue;
+                        }
                         JSONObject threeMeun = new JSONObject();
                         threeMeun.put("path", three.getPath());
                         threeMeun.put("component", three.getComponent());

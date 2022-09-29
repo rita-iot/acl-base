@@ -47,7 +47,7 @@ public class QywxMessagePushController {
     /**
      * 存放access_token
      */
-    private static final Map<String, Object> accessTokenMap = new HashMap<>();
+    private static final Map<String, Object> ACCESS_TOKEN_MAP = new HashMap<>();
 
     /**
      * 获取token
@@ -56,9 +56,9 @@ public class QywxMessagePushController {
     public static String getAccessToken() {
         String s = HttpUtil.get(ACCESS_TOKEN_URL);
         Map map = JSONUtil.toBean(s, Map.class);
-        String access_token = (String) map.get("access_token");
-        accessTokenMap.put("access_token", access_token);
-        return access_token;
+        String accessToken = (String) map.get("access_token");
+        ACCESS_TOKEN_MAP.put("access_token", accessToken);
+        return accessToken;
     }
 
     /**
@@ -72,10 +72,10 @@ public class QywxMessagePushController {
         res.add(articles);
         QywxMessageVo qywxMessageVo = new QywxMessageVo();
         qywxMessageVo.setNews(new News(res));
-        if (accessTokenMap.size() <= 0) {
+        if (ACCESS_TOKEN_MAP.size() <= 0) {
             getAccessToken();
         }
-        String accessToken = (String) accessTokenMap.get("access_token");
+        String accessToken = (String) ACCESS_TOKEN_MAP.get("access_token");
         JSONObject jsonObject = JSONUtil.parseObj(qywxMessageVo, true);
         //Map<String, Object> paramMap = objectToMap(qywxMessageVo);
         String post = HttpUtil.post(PUSH_MESSAGE_URL + accessToken, jsonObject.toStringPretty());
@@ -91,10 +91,10 @@ public class QywxMessagePushController {
         res.add(articles);
         QywxMessageVo qywxMessageVo = new QywxMessageVo();
         qywxMessageVo.setNews(new News(res));
-        if (accessTokenMap.size() <= 0) {
+        if (ACCESS_TOKEN_MAP.size() <= 0) {
             getAccessToken();
         }
-        String accessToken = (String) accessTokenMap.get("access_token");
+        String accessToken = (String) ACCESS_TOKEN_MAP.get("access_token");
         JSONObject jsonObject = JSONUtil.parseObj(qywxMessageVo, true);
         //Map<String, Object> paramMap = objectToMap(qywxMessageVo);
         String post = HttpUtil.post(PUSH_MESSAGE_URL + accessToken, jsonObject.toStringPretty());

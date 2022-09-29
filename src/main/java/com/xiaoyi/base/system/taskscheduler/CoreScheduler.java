@@ -1,4 +1,4 @@
-package com.xiaoyi.base.system.taskScheduler;
+package com.xiaoyi.base.system.taskscheduler;
 
 import cn.hutool.core.date.DateUtil;
 import com.xiaoyi.base.system.entity.AclTask;

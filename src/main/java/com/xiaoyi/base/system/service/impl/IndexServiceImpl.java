@@ -71,8 +71,7 @@ public class IndexServiceImpl implements IndexService {
     public List<JSONObject> getMenu(String username) {
         User user = userService.selectByUsername(username);
         //根据用户id获取用户菜单权限
-        List<JSONObject> permissionList = permissionService.selectPermissionByUserId(user.getId());
-        return permissionList;
+        return permissionService.selectPermissionByUserId(user.getId());
     }
 
 

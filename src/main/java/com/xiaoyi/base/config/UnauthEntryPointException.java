@@ -15,7 +15,7 @@ import java.io.IOException;
  * 未授权统一返回处理类
  */
 @Component
-public class UnauthEntryPoint extends Throwable implements AuthenticationEntryPoint {
+public class UnauthEntryPointException extends Throwable implements AuthenticationEntryPoint {
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response,
                          AuthenticationException e) throws IOException, ServletException {
