@@ -20,6 +20,7 @@ import java.util.concurrent.ScheduledFuture;
  * @date：2022/8/23 8:39
  * @version：1.0
  */
+@SuppressWarnings("ALL")
 @Slf4j
 @Component
 public class CoreScheduler {

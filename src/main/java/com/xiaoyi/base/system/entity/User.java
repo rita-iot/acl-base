@@ -19,10 +19,6 @@ import java.util.Date;
  * @date：2022/9/16 13:32
  * @version：1.0
  */
-
-/**
- * 用户表
- */
 @ApiModel(value = "用户表")
 @Data
 @Builder

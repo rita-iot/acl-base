@@ -4,7 +4,12 @@ import com.alibaba.fastjson.JSONObject;
 
 import java.util.List;
 import java.util.Map;
-
+/**
+ * @description: --
+ * @author：Bing
+ * @date：2022/8/23 8:31
+ * @version：1.0
+ */
 public interface IndexService {
 
     /**

@@ -20,9 +20,13 @@ import java.util.List;
 @AllArgsConstructor
 @Accessors(chain = true)
 public class Page<T> {
-    private Integer currentPage;// 当前页
-    private Integer pageSize;// 每页条数
-    private Integer totalPage;// 总页数
-    private Integer totalCount;// 总条数
+    private Integer currentPage;
+    // 当前页
+    private Integer pageSize;
+    // 每页条数
+    private Integer totalPage;
+    // 总页数
+    private Integer totalCount;
+    // 总条数
     private List<T> list;
 }

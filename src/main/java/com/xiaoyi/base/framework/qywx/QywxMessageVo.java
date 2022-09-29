@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
  * @date：2022/6/6 17:11
  * @version：1.0
  */
+@SuppressWarnings("ALL")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

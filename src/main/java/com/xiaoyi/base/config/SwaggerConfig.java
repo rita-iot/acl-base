@@ -17,8 +17,12 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 import java.util.List;
 
 /**
- * springboot-swagger配置类
+ * @description: --
+ * @author：Bing
+ * @date：2022/3/26 21:49
+ * @version：1.0
  */
+@SuppressWarnings("ALL")
 @Configuration//配置类
 @EnableSwagger2 //swagger注解
 @EnableKnife4j
@@ -29,9 +33,9 @@ public class SwaggerConfig {
         return new ApiInfoBuilder()
                 .title("接口api工具")
                 .description("系统接口API工具")
-                .version("1.0")  //版本
-                .license("xxxx")//所有者
-                .build();//构造
+                .version("1.0")
+                .license("xxxx")
+                .build();
     }
 
     @Bean(value = "defaultApi2")

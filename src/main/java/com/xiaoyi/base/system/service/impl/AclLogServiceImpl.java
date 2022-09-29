@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
  * @date：2022/3/29 11:30
  * @version：1.0
  */
+@SuppressWarnings("ALL")
 @Service
 public class AclLogServiceImpl extends ServiceImpl<AclLogMapper, AclLog> implements AclLogService {
     @Autowired

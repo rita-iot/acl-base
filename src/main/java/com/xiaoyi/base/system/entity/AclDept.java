@@ -22,9 +22,6 @@ import java.util.Date;
  * @version：1.0
  * @author: aaa
  */
-/**
-    * 部门表
-    */
 @ApiModel(value="部门表")
 @Data
 @Builder

@@ -14,9 +14,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Jwt工具类
- * token操作工具类
+ * @description: --
+ * @author：Bing
+ * @date：2022/8/23 8:31
+ * @version：1.0
  */
+@SuppressWarnings("ALL")
 @Component
 public class JwtTokenManager {
     private static final Logger logger = LoggerFactory.getLogger(JwtTokenManager.class);
@@ -36,7 +39,7 @@ public class JwtTokenManager {
          * token 过期时间, 单位: 秒. 这个值表示 4 小时
          */
         long tokenEcpiration = 4 * 60 * 60 * 1000;
-        Map<String, Object> map = new HashMap<>();
+        Map<String, Object> map = new HashMap<>(2);
         map.put("username", username);
         map.put("expire_time", System.currentTimeMillis() + tokenEcpiration);
         JWTSigner signer = JWTSignerUtil.hs512(tokenSignKey.getBytes());

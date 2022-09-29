@@ -19,8 +19,12 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 import java.time.Duration;
 
 /**
- * Redis配置类
+ * @description: --
+ * @author：Bing
+ * @date：2022/3/26 21:49
+ * @version：1.0
  */
+@SuppressWarnings("ALL")
 @EnableCaching //开启缓存
 @Configuration  //配置类
 public class RedisConfig extends CachingConfigurerSupport {

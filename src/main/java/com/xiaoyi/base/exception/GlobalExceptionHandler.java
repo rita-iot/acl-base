@@ -8,8 +8,12 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
- * 全局异常方法
+ * @description: --
+ * @author：Bing
+ * @date：2022/8/23 8:31
+ * @version：1.0
  */
+@SuppressWarnings("ALL")
 @ControllerAdvice
 @Slf4j
 public class GlobalExceptionHandler {

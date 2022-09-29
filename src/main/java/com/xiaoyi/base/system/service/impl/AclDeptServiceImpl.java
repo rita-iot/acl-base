@@ -20,6 +20,7 @@ import java.util.List;
  * @date：2022/8/24 9:53
  * @version：1.0
  */
+@SuppressWarnings("ALL")
 @Service
 public class AclDeptServiceImpl extends ServiceImpl<AclDeptMapper, AclDept> implements AclDeptService{
     @Resource

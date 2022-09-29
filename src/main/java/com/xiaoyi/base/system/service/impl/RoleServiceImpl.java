@@ -53,7 +53,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
             }
         }
 
-        Map<String, Object> roleMap = new HashMap<>();
+        Map<String, Object> roleMap = new HashMap<>(2);
         roleMap.put("assignRoles", assignRoles);
         roleMap.put("allRolesList", allRolesList);
         return roleMap;

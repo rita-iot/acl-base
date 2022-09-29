@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * @author lxh
  */
+@SuppressWarnings("ALL")
 @Configuration
 public class MybatisPlusConfig {
     @Bean

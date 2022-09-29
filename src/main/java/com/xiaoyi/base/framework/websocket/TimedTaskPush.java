@@ -16,6 +16,7 @@ import java.util.Map;
  * @date：2022/6/8 13:37
  * @version：1.0
  */
+@SuppressWarnings("ALL")
 @Component
 @Slf4j
 public class TimedTaskPush {
@@ -36,8 +37,8 @@ public class TimedTaskPush {
                 String name = entry.getKey();
                 try {
                     JSONObject jsonObject = new JSONObject();
-                    jsonObject.set("time", name);  // from 是 zhang
-                    jsonObject.set("text", format);  // text 同上面的text
+                    jsonObject.set("time", name);
+                    jsonObject.set("text", format);
                     session.getBasicRemote().sendText(jsonObject.toString());
                     log.info("websocket 推送消息 {}", format);
                 } catch (IOException e) {

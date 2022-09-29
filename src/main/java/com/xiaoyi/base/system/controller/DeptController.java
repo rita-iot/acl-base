@@ -20,6 +20,7 @@ import java.util.List;
  * @date：2022/8/24 9:55
  * @version：1.0
  */
+@SuppressWarnings("ALL")
 @RestController
 @RequestMapping("dept")
 @Api(tags = "部门管理")

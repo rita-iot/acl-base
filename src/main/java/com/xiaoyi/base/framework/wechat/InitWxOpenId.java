@@ -21,6 +21,7 @@ import java.util.List;
  * @date：2022/8/25 16:28
  * @version：1.0
  */
+@SuppressWarnings("ALL")
 @Component
 public class InitWxOpenId {
     @Autowired

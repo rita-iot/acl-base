@@ -50,7 +50,7 @@ public class WebSocketServer {
             array.add(jsonObject);
         }
 //        {"users": [{"username": "zhang"},{ "username": "admin"}]}
-        sendAllMessage(JSONUtil.toJsonStr(result));  // 后台发送消息给所有的客户端
+        sendAllMessage(JSONUtil.toJsonStr(result));
     }
 
     /**

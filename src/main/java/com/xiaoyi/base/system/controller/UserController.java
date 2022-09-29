@@ -31,6 +31,7 @@ import java.util.Map;
  * @author testjava
  * @since 2020-01-12
  */
+@SuppressWarnings("ALL")
 @RestController
 @RequestMapping("/admin/user")
 @Api(tags = "用户管理")

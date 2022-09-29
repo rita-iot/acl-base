@@ -11,7 +11,10 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- * 认证授权用户类
+ * @description: --
+ * @author：Bing
+ * @date：2022/8/23 8:31
+ * @version：1.0
  */
 @Data
 public class LoginUser implements UserDetails {

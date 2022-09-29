@@ -25,6 +25,7 @@ import java.util.Objects;
  * @date：2022/9/16 12:33
  * @version：1.0
  */
+@SuppressWarnings("ALL")
 @Component
 public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
     @Autowired

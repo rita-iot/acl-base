@@ -3,8 +3,11 @@ package com.xiaoyi.base.core.handler;
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import org.apache.ibatis.reflection.MetaObject;
 import org.springframework.stereotype.Component;
-
 /**
+ * @description: --
+ * @author：Bing
+ * @date：2022/8/23 8:31
+ * @version：1.0
  * 前端传值添加默认值
  * 给对象属性添加默认值
  * MetaObjectHandler接口是mybatisPlus为我们提供的的一个扩展接口，我们可以利用这个接口在我们插入或者更新数据的时候，

@@ -21,10 +21,6 @@ import java.util.Date;
  * @date：2022/8/23 8:31
  * @version：1.0
  */
-
-/**
- * 动态定时任务表
- */
 @ApiModel(value = "动态定时任务表")
 @Data
 @Builder

@@ -15,7 +15,13 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
+/**
+ * @description: --
+ * @author：Bing
+ * @date：2022/3/26 21:49
+ * @version：1.0
+ */
+@SuppressWarnings("ALL")
 @Component
 @Slf4j
 public class SentenceDayTiming {

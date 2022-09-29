@@ -51,8 +51,10 @@ public class NewWebSecurityConfig {
 
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.csrf().disable()//关闭csrf
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)//关闭session
+        //关闭csrf
+        http.csrf().disable()
+                //关闭session
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 //.exceptionHandling().authenticationEntryPoint(new UnauthEntryPoint()).and()
                 .authorizeRequests(auth ->
@@ -99,7 +101,7 @@ public class NewWebSecurityConfig {
         corsConfiguration.addAllowedMethod("PUT");
         corsConfiguration.addAllowedMethod("DELETE");
         corsConfiguration.setMaxAge(3600L);
-        Map<String, CorsConfiguration> map = new HashMap<>();
+        Map<String, CorsConfiguration> map = new HashMap<>(1);
         map.put("cors", corsConfiguration);
         source.setCorsConfigurations(map);
         return source;

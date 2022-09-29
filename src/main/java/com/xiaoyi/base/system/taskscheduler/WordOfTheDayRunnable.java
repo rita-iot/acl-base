@@ -28,6 +28,7 @@ import java.util.List;
  * @date：2022/8/26 8:50
  * @version：1.0
  */
+@SuppressWarnings("ALL")
 @Slf4j
 public class WordOfTheDayRunnable implements Runnable {
     /**

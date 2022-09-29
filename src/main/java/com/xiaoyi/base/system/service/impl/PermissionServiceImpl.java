@@ -23,6 +23,7 @@ import java.util.List;
  * @author testjava
  * @since 2020-01-12
  */
+@SuppressWarnings("ALL")
 @Service
 public class PermissionServiceImpl extends ServiceImpl<PermissionMapper, Permission> implements PermissionService {
 

@@ -12,7 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * 未授权统一返回处理类
+ * @description: --
+ * @author：Bing
+ * @date：2022/3/26 21:49
+ * @version：1.0
  */
 @Component
 public class UnauthEntryPointException extends Throwable implements AuthenticationEntryPoint {

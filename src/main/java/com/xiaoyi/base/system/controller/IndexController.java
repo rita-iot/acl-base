@@ -17,7 +17,10 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 首页接口
+ * @description: --
+ * @author：Bing
+ * @date：2022/8/23 8:31
+ * @version：1.0
  */
 @RestController
 @RequestMapping("index")

@@ -28,6 +28,7 @@ import java.util.Objects;
  * @date：2022/9/16 11:23
  * @version：1.0
  */
+@SuppressWarnings("ALL")
 @RestController
 @Api(tags = "登录注销")
 public class LoginController {
@@ -56,7 +57,7 @@ public class LoginController {
         String username = loginUser.getUsername();
         //String jwt = JwtUtil.createJWT(userId);
         String token = jwtTokenManager.createToken(username);
-        Map<String, Object> map = new HashMap();
+        Map<String, Object> map = new HashMap(2);
         map.put("token", token);
         map.put("user", currentUser);
         //5系统用户相关所有信息放入redis

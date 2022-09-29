@@ -5,12 +5,17 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * 异常状态实体类，返回异常状态信息
+ * @description: --
+ * @author：Bing
+ * @date：2022/8/23 8:31
+ * @version：1.0
  */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class GuliException extends RuntimeException {
-    private Integer code;//状态码
-    private String msg;//异常信息
+    private Integer code;
+    //状态码
+    private String msg;
+    //异常信息
 }

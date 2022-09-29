@@ -1,10 +1,11 @@
 package com.xiaoyi.base.utils;
 
 import lombok.Data;
-
 /**
- * 返回对象
- * @param <T>
+ * @description: --
+ * @author：Bing
+ * @date：2022/3/26 21:49
+ * @version：1.0
  */
 @Data
 public class Result<T> {

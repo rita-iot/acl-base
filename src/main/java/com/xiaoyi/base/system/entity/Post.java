@@ -21,9 +21,6 @@ import java.util.Date;
  * @date：2022/3/26 21:49
  * @version：1.0
  */
-/**
-    * 岗位信息表
-    */
 @ApiModel(value="com-tx-base-primary-entity-Post")
 @Data
 @Builder

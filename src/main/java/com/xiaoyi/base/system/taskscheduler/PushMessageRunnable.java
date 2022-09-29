@@ -23,6 +23,7 @@ import java.util.Map;
  * @date：2022/8/23 21:38
  * @version：1.0
  */
+@SuppressWarnings("ALL")
 @Slf4j
 public class PushMessageRunnable implements Runnable {
     /**
@@ -47,8 +48,8 @@ public class PushMessageRunnable implements Runnable {
         list.add(openid2);
         for (String openId : list) {
             WxMpTemplateMessage templateMessage = WxMpTemplateMessage.builder()
-                    .toUser(openId)//要推送的用户openid
-                    .templateId("nI-62Oab4508jwKxXt-XEnko32UZucgOJqn3geiNfV4")//模板id
+                    .toUser(openId)
+                    .templateId("nI-62Oab4508jwKxXt-XEnko32UZucgOJqn3geiNfV4")
                     //.url("http://ggkt2.vipgz1.91tunnel.com/#/pay/" + orderId)//点击模板消息要访问的网址
                     .build();
             String now = DateUtil.now();

@@ -13,10 +13,23 @@ import java.util.List;
  */
 @Mapper
 public interface PermissionMapper extends BaseMapper<Permission> {
-
+    /**
+     *
+     * @param id
+     * @return
+     */
     List<String> selectPermissionValueByUserId(String id);
 
+    /**
+     *
+     * @return
+     */
     List<String> selectAllPermissionValue();
 
+    /**
+     *
+     * @param userId
+     * @return
+     */
     List<Permission> selectPermissionByUserId(String userId);
 }

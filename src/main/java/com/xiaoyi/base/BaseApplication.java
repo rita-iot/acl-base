@@ -13,8 +13,10 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 /**
- * Base项目系统
- * 主启动类
+ * @description: --
+ * @author：Bing
+ * @date：2022/8/23 8:31
+ * @version：1.0
  */
 @SpringBootApplication
 @EnableAsync

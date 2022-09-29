@@ -21,6 +21,7 @@ import java.lang.reflect.Method;
  * @date：2022/1/22 14:16
  * @version：1.0
  */
+@SuppressWarnings("ALL")
 @Aspect
 @Component
 public class LogAspect {
