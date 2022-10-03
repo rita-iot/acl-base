@@ -10,9 +10,9 @@ spring:
     druid:
       driver-class-name: com.mysql.jdbc.Driver
       #    url: jdbc:mysql://10.0.16.6:3306/acl?useUnicode=true&characterEncoding=utf8&useSSL=false
-      url: jdbc:mysql://42.192.37.49:3306/acl?useUnicode=true&characterEncoding=utf8&useSSL=false
+      url: jdbc:mysql://localhost:3306/acl?useUnicode=true&characterEncoding=utf8&useSSL=false
       username: owocloud
-      password: 8Jp6G3EKscr9#!A&**
+      password: 123456
       # 初始化时建立物理连接的个数。初始化发生在显示调用init方法，或者第一次getConnection时
       initial-size: 10
       # 最小连接池数量
