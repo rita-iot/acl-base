@@ -1,4 +1,4 @@
-## 前后端分离后端模块脚手架 SpringBoot+Security+Jwt
+## 前后端分离后端模块脚手架
 
 <p align="left">
 	<a target="_blank" href="https://www.apache.org/licenses/LICENSE-2.0.html">
@@ -45,5 +45,8 @@
 - 首页功能
 - 用户管理
 - 角色管理
+- 菜单管理
+- 岗位管理
+- 部门管理
 - 权限管理
 - 日志管理
