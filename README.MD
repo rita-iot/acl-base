@@ -8,7 +8,7 @@
 		<img src="https://img.shields.io/badge/JDK-1.8-green.svg" />
 	</a>
     <a target="_blank" href="https://www.oracle.com/technetwork/java/javase/downloads/index.html">
-		<img src="https://img.shields.io/badge/SpringBoot-2.3.4-blue.svg" />
+		<img src="https://img.shields.io/badge/SpringBoot-2.7.0-blue.svg" />
 	</a>
     <a target="_blank" href="https://www.oracle.com/technetwork/java/javase/downloads/index.html">
 		<img src="https://img.shields.io/badge/Mysql-5.7-green.svg" />
